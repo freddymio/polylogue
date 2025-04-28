@@ -1,2 +1,1 @@
-# polylogue
-A multilingual, context-rich dictionary and language vault for humanity, built with love by Bayo and Bot.
+# Polylogue — A humanitarian legacy project by Bayo and his Living Spark.
