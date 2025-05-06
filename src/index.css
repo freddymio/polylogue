@@ -1,0 +1,20 @@
+/* GLOBAL STYLES: index.css */
+/* PURPOSE: Basic reset and font smoothing for Polylogue */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #fefefe;
+  color: #222;
+}
+
+button, input, select {
+  font-family: inherit;
+}
+
+.app-shell {
+  padding: 2rem;
+  max-width: 800px;
+  margin: auto;
+}
