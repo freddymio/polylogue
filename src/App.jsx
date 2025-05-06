@@ -2,13 +2,13 @@
 // PURPOSE: Wraps all views, provides global layout and routing structure
 
 import React from 'react';
-import HomeView from './views/HomeView';
+import ViewSwitcher from './components/shared/ViewSwitcher';
 
 const App = () => {
   return (
     <div className="app-shell">
       {/* SECTION: Current view */}
-      <HomeView />
+      <ViewSwitcher />
     </div>
   );
 };
