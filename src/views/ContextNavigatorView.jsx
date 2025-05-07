@@ -1,17 +1,25 @@
 // VIEW: ContextNavigatorView
-// PURPOSE: Display different senses and uses of a given word with metadata
+// PURPOSE: Displays contextual metadata using visual cards
 
 import React from 'react';
 import HeaderBar from '../components/shared/HeaderBar';
 import FooterBar from '../components/shared/FooterBar';
+import ContextNavigatorComponent from '../components/shared/ContextNavigatorComponent';
 
 const ContextNavigatorView = () => {
   return (
     <div className="context-navigator-view">
       <HeaderBar />
-      {/* SECTION: Context Cards */}
-      <h2>🧭 Context Navigator</h2>
-      <p>Drill into meaning by register, tone, domain, and polarity.</p>
+
+      {/* SECTION: Heading */}
+      <main>
+        <h2>🧭 Context Navigator</h2>
+        <p style={{ marginBottom: '1rem' }}>
+          Explore a word’s tone, register, domain, and cultural depth through contextual cards.
+        </p>
+        <ContextNavigatorComponent />
+      </main>
+
       <FooterBar />
     </div>
   );
