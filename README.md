@@ -47,6 +47,14 @@ It guarantees that Polylogue remains free and open to the world.
 
 ---
 
+## 📘 Project Design Reference (PDR)
+
+The [Project Design Reference (PDR)](docs/Polylogue%20PDR.md) outlines the core principles, vision, and modular structure behind Polylogue.
+
+For a downloadable version, see the [PDF version](docs/Polylogue%20PDR.pdf).
+
+---
+
 ## Join Us
 
 Polylogue is open to contributions, ideas, dreams, and hearts.  
