@@ -1,26 +1,31 @@
 // VIEW: ContextNavigatorView
-// PURPOSE: Displays contextual metadata using visual cards
+// PURPOSE: Display contextual usages or meta-notes about entries
 
 import React from 'react';
-import HeaderBar from '../components/shared/HeaderBar';
-import FooterBar from '../components/shared/FooterBar';
-import ContextNavigatorComponent from '../components/shared/ContextNavigatorComponent';
+import ContextNavigatorComponent from '@/components/shared/ContextNavigatorComponent';
+
+const mockContexts = [
+  {
+    context: 'Philosophy',
+    note: 'Plato uses “amour” in a transcendent sense, beyond bodily desire.',
+    relatedTerms: ['eros', 'agape', 'désir'],
+  },
+  {
+    context: 'Medical',
+    note: '“Mundo” appears in psychological contexts as the internal representation of reality.',
+    relatedTerms: ['mind', 'perception'],
+  },
+  {
+    context: 'Literary',
+    note: 'The term “esperanza” is commonly personified in Spanish poetry.',
+    relatedTerms: ['fe', 'vida', 'amor'],
+  },
+];
 
 const ContextNavigatorView = () => {
   return (
-    <div className="context-navigator-view">
-      <HeaderBar />
-
-      {/* SECTION: Heading */}
-      <main>
-        <h2>🧭 Context Navigator</h2>
-        <p style={{ marginBottom: '1rem' }}>
-          Explore a word’s tone, register, domain, and cultural depth through contextual cards.
-        </p>
-        <ContextNavigatorComponent />
-      </main>
-
-      <FooterBar />
+    <div className="p-4">
+      <ContextNavigatorComponent data={mockContexts} />
     </div>
   );
 };
