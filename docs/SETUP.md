@@ -10,6 +10,9 @@
 * **npm** (v9+)
 * Code editor (e.g., [VS Code](https://code.visualstudio.com/))
 * Terminal (e.g., PowerShell, Git Bash, Terminal.app)
+* Optional: [GitHub Desktop](https://desktop.github.com/) (for users who prefer a visual Git interface)
+
+> ⚠️ If installing Git manually, note that the option to **"Git from the command line and also from 3rd-party software"** appears several screens *after* starting the installer. Leave it enabled to use Git in PowerShell or CMD.
 
 ---
 
@@ -48,13 +51,23 @@ git clone git@github.com:freddymio/polylogue.git
 cd polylogue
 ```
 
-### 2. Install Dependencies
+### 2. Initialize the Project (if starting from scratch)
+
+If you haven't cloned the project and are starting locally:
+
+```bash
+npm create vite@latest . -- --template react
+```
+
+> Select `react` as the template when prompted. This creates `package.json`, Vite config, and boilerplate structure.
+
+### 3. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. Start the Dev Server
+### 4. Start the Dev Server
 
 ```bash
 npm run dev
@@ -85,6 +98,8 @@ polylogue/
 ├── .gitignore
 ├── index.html              # Vite entry HTML
 ├── package.json            # Project manifest
+├── package-lock.json       # Locked dependency versions
+├── vite.config.js          # Vite configuration
 └── README.md
 ```
 
@@ -134,6 +149,26 @@ git push -u origin main
 ```
 
 Now your local project is synced to GitHub.
+
+---
+
+## Common Git Commands (Cheatsheet)
+
+```bash
+git status               # See current changes & branch
+
+git fetch origin         # Check for updates without merging
+git pull origin main     # Get remote changes into your branch
+
+git add .                # Stage all changes
+git commit -m "Your message"   # Commit with a description
+git push                 # Upload local commits to GitHub
+
+git log --oneline        # View commit history (short form)
+git diff                 # See what’s changed (before committing)
+```
+
+💡 Always run `git status` before pushing or pulling.
 
 ---
 
