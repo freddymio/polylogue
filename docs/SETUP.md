@@ -13,9 +13,22 @@
 
 ---
 
-## Installation Steps
+## Fork or Clone the Repository
 
-### 1. Clone the Repository
+If you are contributing to the project:
+
+### Option 1: Fork on GitHub
+
+1. Go to [https://github.com/freddymio/polylogue](https://github.com/freddymio/polylogue)
+2. Click the **Fork** button (top-right corner)
+3. Clone your fork locally:
+
+```bash
+# Replace YOUR_USERNAME with your GitHub handle
+git clone https://github.com/YOUR_USERNAME/polylogue.git
+```
+
+### Option 2: Clone the Main Repo (read-only)
 
 ```bash
 # via HTTPS
@@ -25,19 +38,23 @@ git clone https://github.com/freddymio/polylogue.git
 git clone git@github.com:freddymio/polylogue.git
 ```
 
-### 2. Navigate to the Project
+---
+
+## Installation Steps
+
+### 1. Navigate to the Project
 
 ```bash
 cd polylogue
 ```
 
-### 3. Install Dependencies
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 4. Start the Dev Server
+### 3. Start the Dev Server
 
 ```bash
 npm run dev
@@ -54,6 +71,7 @@ You should see the Polylogue interface.
 ```bash
 polylogue/
 ├── docs/                    # Documentation
+│   └── SETUP.md             # This setup guide
 ├── public/                  # Static assets (optional)
 ├── src/                     # Source code
 │   ├── components/
@@ -111,7 +129,7 @@ git remote add origin https://github.com/freddymio/polylogue.git
 ```bash
 git add .
 git commit -m "Update after successful Vite setup and launch"
-git branch -M main
+git pull origin main --allow-unrelated-histories
 git push -u origin main
 ```
 
