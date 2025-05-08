@@ -1,38 +1,27 @@
 // VIEW: HomeView
-// PURPOSE: Main screen showing search interface and language selectors
+// PURPOSE: Landing page introducing Polylogue and linking main features
 
 import React from 'react';
-
-// Shared UI Components
-import HeaderBar from '../components/shared/HeaderBar';
-import FooterBar from '../components/shared/FooterBar';
-import SearchBarComponent from '../components/shared/SearchBarComponent';
-import LanguageSelectorComponent from '../components/shared/LanguageSelectorComponent';
-import DirectionSwitcher from '../components/shared/DirectionSwitcher';
+import { Link } from 'react-router-dom';
 
 const HomeView = () => {
-  // SECTION: State (placeholder)
-  // e.g. const [fromLang, setFromLang] = useState('en');
-
-  // SECTION: Handlers (placeholder)
-  // const handleSearch = (query) => { ... }
-
   return (
-    <div className="home-view">
-      {/* SECTION: Header */}
-      <HeaderBar />
+    <div className="h-full p-8 flex flex-col items-center justify-center text-center space-y-6">
+      <h1 className="text-4xl font-bold text-orange-600">Welcome to Polylogue</h1>
+      <p className="text-muted-foreground max-w-xl">
+        A multilingual dictionary experience designed to help you navigate words, meanings, and context — not just translation.
+      </p>
 
-      {/* SECTION: Language Selection */}
-      <div className="language-controls">
-        <LanguageSelectorComponent fromLang="en" toLang="fr" onChange={() => {}} />
-        <DirectionSwitcher onSwitch={() => {}} />
+      <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
+        <a href="/vault" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🔍 Vault</a>
+        <a href="/glossary" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">📚 Glossary</a>
+        <a href="/context" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🧠 Context</a>
+        <a href="/language" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🌐 Language Settings</a>
       </div>
 
-      {/* SECTION: Search */}
-      <SearchBarComponent onSearch={() => {}} onVoiceInput={() => {}} />
-
-      {/* SECTION: Footer */}
-      <FooterBar />
+      <div className="mt-6 text-xs text-muted-foreground">
+        Built with love by Bayo and the Living Spark 🧡
+      </div>
     </div>
   );
 };
