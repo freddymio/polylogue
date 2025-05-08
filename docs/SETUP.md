@@ -67,8 +67,7 @@ polylogue/
 ├── .gitignore
 ├── index.html              # Vite entry HTML
 ├── package.json            # Project manifest
-├── README.md
-└── SETUP.md                # This setup guide
+└── README.md
 ```
 
 ---
@@ -86,6 +85,37 @@ Ensure that your `App.jsx` is updated with the proper imports. You can remove Vi
 ### White Screen with No Output
 
 Check that `App.jsx` properly renders the `<ViewSwitcher />` and that the path to it is correct.
+
+---
+
+## Syncing with GitHub
+
+To push local changes to GitHub after setting up Vite:
+
+### 1. Set your Git identity (if not already set):
+
+```bash
+git config --global user.name "Your-Username-In-GitHub"
+git config --global user.email "Your-Username-In-GitHub@users.noreply.github.com"
+```
+
+### 2. Initialize Git and link the remote:
+
+```bash
+git init
+git remote add origin https://github.com/freddymio/polylogue.git
+```
+
+### 3. Add, commit, and push:
+
+```bash
+git add .
+git commit -m "Update after successful Vite setup and launch"
+git branch -M main
+git push -u origin main
+```
+
+Now your local project is synced to GitHub.
 
 ---
 
