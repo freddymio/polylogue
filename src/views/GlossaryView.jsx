@@ -1,23 +1,37 @@
 // VIEW: GlossaryView
-// PURPOSE: Displays the glossary screen with definition table
+// PURPOSE: Display the multilingual glossary entries using the GlossaryTableComponent
 
 import React from 'react';
-import HeaderBar from '../components/shared/HeaderBar';
-import FooterBar from '../components/shared/FooterBar';
-import GlossaryTableComponent from '../components/shared/GlossaryTableComponent';
+import GlossaryTableComponent from '@/components/shared/GlossaryTableComponent';
+
+const mockGlossary = [
+  {
+    source: 'amour',
+    target: 'love',
+    pos: 'noun',
+    langFrom: 'FR',
+    langTo: 'EN',
+  },
+  {
+    source: 'esperanza',
+    target: 'hope',
+    pos: 'noun',
+    langFrom: 'ES',
+    langTo: 'EN',
+  },
+  {
+    source: 'connaissance',
+    target: 'knowledge',
+    pos: 'noun',
+    langFrom: 'FR',
+    langTo: 'EN',
+  },
+];
 
 const GlossaryView = () => {
   return (
-    <div className="glossary-view">
-      <HeaderBar />
-
-      <main>
-        <h2>📘 Glossary</h2>
-        <p style={{ marginBottom: '1rem' }}>Terms that clarify Polylogue’s structure, logic, and vibe.</p>
-        <GlossaryTableComponent />
-      </main>
-
-      <FooterBar />
+    <div className="p-4">
+      <GlossaryTableComponent entries={mockGlossary} />
     </div>
   );
 };
