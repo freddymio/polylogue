@@ -55,6 +55,10 @@ For a downloadable version, see the [PDF version](docs/Polylogue%20PDR.pdf).
 
 ---
 
+📖 [Setup Instructions](docs/SETUP.md)
+
+---
+
 ## Join Us
 
 Polylogue is open to contributions, ideas, dreams, and hearts.  
