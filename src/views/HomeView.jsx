@@ -14,7 +14,9 @@ const HomeView = () => {
 
       <div className="grid grid-cols-2 gap-4 mt-4 text-sm">
         <a href="/vault" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🔍 Vault</a>
-        <a href="/glossary" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">📚 Glossary</a>
+	<a href="/contexts" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">
+  🧩 Context Gallery
+</a>        <a href="/glossary" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">📚 Glossary</a>
         <a href="/context" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🧠 Context</a>
         <a href="/language" className="px-4 py-2 bg-orange-100 rounded hover:bg-orange-200">🌐 Language Settings</a>
       </div>

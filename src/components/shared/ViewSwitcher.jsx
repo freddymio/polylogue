@@ -2,6 +2,7 @@
 // PURPOSE: Routes view rendering based on URL path
 
 import React from 'react';
+import ContextGallery from './ContextGallery';
 import HomeView from '@/views/HomeView';
 import VaultView from '@/views/VaultView';
 import GlossaryView from '@/views/GlossaryView';
@@ -21,6 +22,8 @@ const ViewSwitcher = () => {
       return <GlossaryView />;
     case '/context':
       return <ContextNavigatorView />;
+    case '/contexts':
+      return <ContextGallery />;
     case '/language':
       return <LanguageManagerView />;
     default:
