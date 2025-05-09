@@ -2,7 +2,7 @@
 // PURPOSE: Display contextual usages or meta-notes about entries
 
 import React from 'react';
-import ContextNavigatorComponent from '@/components/shared/ContextNavigatorComponent';
+import ContextNavigatorComponent from '../components/shared/ContextNavigatorComponent';
 
 const mockContexts = [
   {

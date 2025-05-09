@@ -1,26 +1,26 @@
 // STORE: vaultStore.js
-// PURPOSE: Simple local vault store with add, remove, and list logic
+// PURPOSE: Zustand-based global state for saved words & context cards
 
-let vault = [];
+import { create } from 'zustand';
 
-// Adds a new word to the vault
-export const addWord = (word) => {
-  if (!vault.includes(word)) {
-    vault.push(word);
-  }
-};
+export const useVaultStore = create((set) => ({
+  words: [],
+  cards: [],
 
-// Removes a word from the vault
-export const removeWord = (word) => {
-  vault = vault.filter(w => w !== word);
-};
+  addWord: (word) =>
+    set((state) =>
+      state.words.includes(word)
+        ? state
+        : { words: [...state.words, word] }
+    ),
 
-// Lists all saved words
-export const listWords = () => {
-  return [...vault];
-};
+  removeWord: (word) =>
+    set((state) => ({
+      words: state.words.filter((w) => w !== word),
+    })),
 
-// Clears vault (dev only)
-export const clearVault = () => {
-  vault = [];
-};
+  clearVault: () => set({ words: [] }),
+
+  // Mock: add sample context cards
+  setCards: (cards) => set({ cards }),
+}));

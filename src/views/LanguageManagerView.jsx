@@ -2,8 +2,8 @@
 // PURPOSE: Allow user to select source and target languages
 
 import React, { useState } from 'react';
-import LanguageSelectorComponent from '@/components/shared/LanguageSelectorComponent';
-import DirectionSwitcher from '@/components/shared/DirectionSwitcher';
+import LanguageSelectorComponent from '../components/shared/LanguageSelectorComponent';
+import DirectionSwitcher from '../components/shared/DirectionSwitcher';
 
 const allLanguages = ['EN', 'FR', 'ES', 'DE', 'GR', 'IT', 'PT'];
 

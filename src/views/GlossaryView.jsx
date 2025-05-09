@@ -2,7 +2,7 @@
 // PURPOSE: Display the multilingual glossary entries using the GlossaryTableComponent
 
 import React from 'react';
-import GlossaryTableComponent from '@/components/shared/GlossaryTableComponent';
+import GlossaryTableComponent from '../components/shared/GlossaryTableComponent';
 
 const mockGlossary = [
   {
