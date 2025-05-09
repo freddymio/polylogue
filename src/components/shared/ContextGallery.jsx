@@ -7,6 +7,17 @@ import { useVaultStore } from '../../stores/vaultStore';
 
 const ContextGallery = () => {
   const contextCards = useVaultStore((state) => state.cards);
+  const setCards = useVaultStore((state) => state.setCards);
+
+  React.useEffect(() => {
+    setCards([
+      { label: 'Freedom of speech', tone: 'highlight' },
+      { label: 'Identity politics', tone: 'critical' },
+      { label: 'Civic discourse', tone: 'positive' },
+      { label: 'Colonial history', tone: 'neutral' },
+    ]);
+  }, []);
+
   const [search, setSearch] = useState('');
   const [toneFilter, setToneFilter] = useState('all');
   const filtered = (contextCards || []).filter((ctx) => {
