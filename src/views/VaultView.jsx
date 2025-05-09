@@ -2,7 +2,7 @@
 // PURPOSE: Display a list of preview cards representing vocabulary entries
 
 import React from 'react';
-import VaultPreviewCard from '../components/views/VaultPreviewCard';
+import VaultPreviewCard from "../components/shared/VaultPreviewCard";
 
 const mockEntries = [
   {
