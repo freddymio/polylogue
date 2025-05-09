@@ -3,25 +3,17 @@
 
 import React, { useState } from 'react';
 import ContextGalleryCard from './ContextGalleryCard';
-
-const mockContexts = [
-  { emoji: '🧠', label: 'Philosophy', tone: 'highlight' },
-  { emoji: '🩺', label: 'Medical', tone: 'critical' },
-  { emoji: '📜', label: 'Historical', tone: 'neutral' },
-  { emoji: '🎭', label: 'Literary', tone: 'positive' },
-  { emoji: '🌍', label: 'Cultural', tone: 'highlight' },
-  { emoji: '⚖️', label: 'Legal', tone: 'critical' },
-];
+import { useVaultStore } from '../../stores/vaultStore';
 
 const ContextGallery = () => {
+  const contextCards = useVaultStore((state) => state.cards);
   const [search, setSearch] = useState('');
   const [toneFilter, setToneFilter] = useState('all');
-
-  const filtered = mockContexts.filter((ctx) => {
-    const matchesTone = toneFilter === 'all' || ctx.tone === toneFilter;
-    const matchesSearch = ctx.label.toLowerCase().includes(search.toLowerCase());
-    return matchesTone && matchesSearch;
-  });
+  const filtered = (contextCards || []).filter((ctx) => {
+  const matchesTone = toneFilter === 'all' || ctx.tone === toneFilter;
+  const matchesSearch = ctx.label.toLowerCase().includes(search.toLowerCase());
+  return matchesTone && matchesSearch;
+});
 
   return (
     <div className="p-4 space-y-4">
