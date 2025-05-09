@@ -67,7 +67,15 @@ npm create vite@latest . -- --template react
 npm install
 ```
 
-### 4. Start the Dev Server
+### 4. Install Required Libraries
+
+```bash
+npm install zustand         # For global state management
+npm install @shadcn/ui      # For UI components like Card
+npm install react-router-dom # (optional, if routing is added later)
+```
+
+### 5. Start the Dev Server
 
 ```bash
 npm run dev
@@ -79,7 +87,7 @@ You should see the Polylogue interface.
 
 ---
 
-## Folder Structure
+## 📁 Folder Structure
 
 ```bash
 polylogue/

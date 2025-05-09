@@ -10,9 +10,7 @@ import ContextNavigatorView from '../../views/ContextNavigatorView';
 import LanguageManagerView from '../../views/LanguageManagerView';
 import NotFoundView from '../../views/NotFoundView';
 
-const ViewSwitcher = () => {
-  const path = window.location.pathname;
-
+const ViewSwitcher = ({ path }) => {
   switch (path) {
     case '/':
       return <HomeView />;
@@ -24,7 +22,7 @@ const ViewSwitcher = () => {
       return <ContextNavigatorView />;
     case '/contexts':
       return <ContextGallery />;
-    case '/language':
+    case '/languages':
       return <LanguageManagerView />;
     default:
       return <NotFoundView />;
