@@ -67,15 +67,119 @@ npm create vite@latest . -- --template react
 npm install
 ```
 
-### 4. Install Required Libraries
+---
+
+## Required Packages (Additions)
+
+### React Router DOM
 
 ```bash
-npm install zustand         # For global state management
-npm install @shadcn/ui      # For UI components like Card
-npm install react-router-dom # (optional, if routing is added later)
+npm install react-router-dom
 ```
 
-### 5. Start the Dev Server
+### Zustand Store
+
+```bash
+npm install zustand
+```
+
+### TailwindCSS & PostCSS (manual fallback method)
+
+```bash
+npm install -D tailwindcss@latest postcss@latest autoprefixer@latest @tailwindcss/postcss
+```
+
+If `npx tailwindcss init -p` fails, create the config files manually:
+
+**Note:** These files should be placed at the project root:
+
+* `tailwind.config.js`:
+
+```js
+module.exports = {
+  content: ['./index.html', './src/**/*.{js,jsx}'],
+  theme: {
+    extend: {},
+  },
+  plugins: [],
+};
+```
+
+* `postcss.config.js`:
+
+```js
+module.exports = {
+  plugins: {
+    '@tailwindcss/postcss': {},
+    autoprefixer: {},
+  },
+};
+```
+
+* In `src/index.css`, ensure it starts with:
+
+```css
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+```
+
+### UI Components (Lucide Icons and shadcn/ui)
+
+```bash
+npm install lucide-react
+```
+
+Then manually create:
+
+* `src/components/ui/card.jsx`
+
+```jsx
+export function Card({ children }) {
+  return <div className="rounded-xl border bg-white p-4 shadow-md">{children}</div>;
+}
+
+export function CardContent({ children }) {
+  return <div className="mt-2 text-gray-600">{children}</div>;
+}
+```
+
+---
+
+## Enable Path Aliases (for @/ syntax)
+
+1. **Install Node Path Module** *(Node.js >= 14 usually has it)*
+2. Edit `vite.config.js`:
+
+```js
+import path from 'path';
+
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+});
+```
+
+3. Add `tsconfig.json` at root if not present:
+
+```json
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  }
+}
+```
+
+---
+
+## Start the Dev Server
 
 ```bash
 npm run dev
@@ -96,7 +200,8 @@ polylogue/
 ├── public/                  # Static assets (optional)
 ├── src/                     # Source code
 │   ├── components/
-│   │   └── shared/          # Shared reusable components
+│   │   ├── shared/          # Shared reusable components
+│   │   └── ui/              # Manually added UI components
 │   ├── hooks/               # Custom React hooks
 │   ├── stores/              # Global state stores
 │   ├── views/               # View containers (pages)
@@ -104,10 +209,13 @@ polylogue/
 │   ├── main.jsx             # Entry point
 │   └── index.css            # Global styles
 ├── .gitignore
-├── index.html              # Vite entry HTML
-├── package.json            # Project manifest
-├── package-lock.json       # Locked dependency versions
-├── vite.config.js          # Vite configuration
+├── index.html               # Vite entry HTML
+├── package.json             # Project manifest
+├── package-lock.json        # Locked dependency versions
+├── postcss.config.js        # PostCSS config (manual)
+├── tailwind.config.js       # Tailwind config (manual)
+├── tsconfig.json            # Alias configuration
+├── vite.config.js           # Vite configuration
 └── README.md
 ```
 
@@ -117,82 +225,57 @@ polylogue/
 
 ### Error: `package.json` not found
 
-If you copied the repo instead of cloning, ensure that `package.json` is present at the root.
-
-### Error: `viteLogo` or `reactLogo` not found
-
-Ensure that your `App.jsx` is updated with the proper imports. You can remove Vite's boilerplate assets.
+Make sure you cloned the repo or ran `npm create vite` properly.
 
 ### White Screen with No Output
 
-Check that `App.jsx` properly renders the `<ViewSwitcher />` and that the path to it is correct.
+Check for routing or component import errors (case-sensitive).
+
+### UI or Style Not Loading
+
+Ensure TailwindCSS was installed and `@tailwind base;` etc. are in `index.css`.
 
 ---
 
 ## Syncing with GitHub
 
-To push local changes to GitHub after setting up Vite:
-
-### 1. Set your Git identity (if not already set):
-
 ```bash
-git config --global user.name "Your-Username-In-GitHub"
-git config --global user.email "Your-Username-In-GitHub@users.noreply.github.com"
+git config --global user.name "Your-Username"
+git config --global user.email "Your-Username@users.noreply.github.com"
 ```
-
-### 2. Initialize Git and link the remote:
 
 ```bash
 git init
 git remote add origin https://github.com/freddymio/polylogue.git
-```
 
-### 3. Add, commit, and push:
-
-```bash
 git add .
-git commit -m "Update after successful Vite setup and launch"
+git commit -m "Initial commit after full setup"
 git pull origin main --allow-unrelated-histories
 git push -u origin main
 ```
-
-Now your local project is synced to GitHub.
 
 ---
 
 ## Common Git Commands (Cheatsheet)
 
 ```bash
-git status               # See current changes & branch
-
-git fetch origin         # Check for updates without merging
-git pull origin main     # Get remote changes into your branch
-
-git add .                # Stage all changes
-git commit -m "Your message"   # Commit with a description
-git push                 # Upload local commits to GitHub
-
-git log --oneline        # View commit history (short form)
-git diff                 # See what’s changed (before committing)
+git status           # View current changes
+git add .            # Stage all changes
+git commit -m "Msg"  # Commit changes
+git pull origin main # Pull latest from GitHub
+git push             # Push local commits to GitHub
+git log --oneline    # Compact history
 ```
 
-💡 Always run `git status` before pushing or pulling.
+💡 Always run `git status` before pulling or pushing.
 
 ---
 
 ## Development Environment Notes
 
 * ✅ Tested on **Windows 11**, using **PowerShell 7.5.1**
-* ✅ Vite + React
-* 🧪 Can later add Linux/macOS instructions if needed
-
----
-
-## Next Steps
-
-* Push new documentation to `docs/`
-* Use this file to track future setup updates
-* Tag environment-specific sections as needed (Windows/macOS/Linux)
+* ✅ Node v18+, Vite v6+, React v18+, TailwindCSS v3+
+* 🧪 Further OS notes can be added (Linux/macOS)
 
 ---
 
