@@ -9,6 +9,7 @@ import GlossaryView from '../../views/GlossaryView';
 import ContextNavigatorView from '../../views/ContextNavigatorView';
 import LanguageManagerView from '../../views/LanguageManagerView';
 import NotFoundView from '../../views/NotFoundView';
+import LookupView from '../../views/LookupView';
 
 const ViewSwitcher = ({ path }) => {
   switch (path) {
@@ -24,6 +25,8 @@ const ViewSwitcher = ({ path }) => {
       return <ContextGallery />;
     case '/languages':
       return <LanguageManagerView />;
+    case '/lookup':
+      return <LookupView />;
     default:
       return <NotFoundView />;
   }
