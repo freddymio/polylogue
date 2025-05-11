@@ -23,7 +23,7 @@ const HomeView = () => {
       </p>
 
       {/* Translator input area */}
-      <div className="flex flex-col items-center space-y-4">
+      <div className="flex flex-col items-center space-y-4 mb-12">
         <div className="flex gap-2 items-center">
           <label htmlFor="fromLang">From:</label>
           <select
@@ -61,15 +61,6 @@ const HomeView = () => {
         <button className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
           🔍 Search
         </button>
-      </div>
-
-      {/* Navigation */}
-      <div className="grid grid-cols-2 gap-4 pt-6">
-        <Link to="/vault" className="text-blue-500 underline">🧑‍💼 Vault</Link>
-        <Link to="/contexts" className="text-blue-500 underline">🧩 Context Gallery</Link>
-        <Link to="/glossary" className="text-blue-500 underline">📚 Glossary</Link>
-        <Link to="/context" className="text-blue-500 underline">🧠 Context</Link>
-        <Link to="/languages" className="text-blue-500 underline">🌐 Language Settings</Link>
       </div>
 
       <p className="text-sm text-muted-foreground italic">
