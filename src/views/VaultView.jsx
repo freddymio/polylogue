@@ -5,7 +5,7 @@ import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
 
 const VaultView = () => {
-  const vault = useVaultStore((state) => state.entries);
+  const vault = useVaultStore((state) => state.cards);
   const removeFromVault = useVaultStore((state) => state.removeFromVault);
 
   return (
@@ -17,16 +17,14 @@ const VaultView = () => {
       ) : (
         <ul className="space-y-2">
           {vault.map((entry, index) => (
-            <li key={index} className="border rounded p-3 bg-white shadow-sm">
-              <div>
-                <strong>{entry.word}</strong> — {entry.translation}
-              </div>
-              <div className="text-sm text-gray-500">
-                Tone: <em>{entry.tone}</em> | Theme: <em>{entry.theme}</em>
+            <li key={index} className="border p-3 rounded bg-white shadow-sm">
+              <strong>{entry.word}</strong> — {entry.translation}
+              <div className="text-sm italic">
+                Tone: <span className="text-gray-600">{entry.tone}</span> | Theme: <span className="text-gray-600">{entry.theme}</span>
               </div>
               <button
-                className="ml-2 text-red-600 hover:underline text-sm"
-                onClick={() => removeFromVault(card.word)}
+                className="mt-2 text-red-600 hover:underline text-sm"
+                onClick={() => removeFromVault(entry.word)}
               >
                 ❌ Remove
               </button>
