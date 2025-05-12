@@ -30,17 +30,26 @@ export const useVaultStore = create((set, get) => ({
       glossary: state.glossary.filter((entry) => entry.word !== word),
     })),
 
-  // Remove vault entries
+  // VAULT state
+  cards: [],
+
+  addToVault: (entry) =>
+    set((state) => {
+      const exists = state.cards.find((c) => c.word === entry.word);
+      if (!exists) {
+        return {
+          cards: [...state.cards, entry],
+        };
+      } else {
+        return {}; // no duplicate
+      }
+    }),
+
   removeFromVault: (word) =>
     set((state) => ({
       cards: state.cards.filter((card) => card.word !== word),
     })),
 
-  // 🧩 Vault entries with tone + theme
-  entries: [],
-  addToVault: (entry) =>
-    set((state) => ({
-      entries: [...state.entries, entry],
-    })),
-  listVault: () => get().entries,
+  listVault: () => get().cards,
+
 }));
