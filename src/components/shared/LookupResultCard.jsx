@@ -14,15 +14,13 @@ const LookupResultCard = ({ word, translation, partOfSpeech, context, from, to }
   const addToGlossary = useVaultStore((state) => state.addToGlossary);
 
   const handleSave = () => {
-
     addToGlossary({
-      word: result.word,
-      translation: result.translation,
-      language: result.language,
+      word,
+      translation,
+      language: to, // 🧠 This reflects the target language
       tone: 'highlight',
       theme: 'identity',
     });
-
   };
 
   return (
