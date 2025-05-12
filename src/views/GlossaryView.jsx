@@ -4,10 +4,9 @@
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
 
-const removeFromGlossary = useVaultStore((state) => state.removeFromGlossary);
-
 const GlossaryView = () => {
   const glossary = useVaultStore((state) => state.glossary);
+  const removeFromGlossary = useVaultStore((state) => state.removeFromGlossary);
 
   return (
     <div className="p-4 space-y-4 max-w-xl mx-auto">
