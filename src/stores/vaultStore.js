@@ -4,12 +4,21 @@
 import { create } from 'zustand';
 
 export const useVaultStore = create((set) => ({
-  cards: [], // context cards
+  cards: [],
   setCards: (newCards) => set({ cards: newCards }),
 
-  glossary: [], // 🆕
+  glossary: [],
   addToGlossary: (entry) =>
-    set((state) => ({
-      glossary: [...state.glossary, entry],
-    })),
+    set((state) => {
+      const exists = state.glossary.find(
+        (e) => e.word === entry.word && e.translation === entry.translation
+      );
+      if (!exists) {
+        return {
+          glossary: [...state.glossary, entry],
+        };
+      } else {
+        return {}; // no change
+      }
+    }),
 }));
