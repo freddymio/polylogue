@@ -10,8 +10,8 @@ const langFlags = {
   es: '🇪🇸',
 };
 
-const LookupResultCard = ({ result }) => {
-  const { word, translation, language } = result;
+const LookupResultCard = ({ result = {} }) => {
+  const { word = '', translation = '', language = 'unknown' } = result;
 
   const addToGlossary = useVaultStore((state) => state.addToGlossary);
   const addToVault = useVaultStore((state) => state.addToVault);

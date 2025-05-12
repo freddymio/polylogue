@@ -35,9 +35,9 @@ const LookupView = () => {
       {loading ? (
         <div className="italic text-muted-foreground">Looking it up...</div>
       ) : (
-        results.map((res, i) => (
-          <LookupResultCard key={i} {...res} />
-        ))
+        {results.map((res, i) => (
+          <LookupResultCard key={i} result={res} />
+        ))}
       )}
     </div>
   );
