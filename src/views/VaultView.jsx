@@ -4,10 +4,9 @@
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
 
-const removeFromVault = useVaultStore((state) => state.removeFromVault);
-
 const VaultView = () => {
   const vault = useVaultStore((state) => state.entries);
+  const removeFromVault = useVaultStore((state) => state.removeFromVault);
 
   return (
     <div className="p-4 max-w-2xl mx-auto space-y-4">
