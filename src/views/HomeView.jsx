@@ -44,18 +44,21 @@ const HomeView = () => {
           </select>
         </div>
 
-        <input
-          type="text"
-          placeholder="Type a word..."
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          className="border px-3 py-1 rounded w-64 text-center"
-        />
-{/*
-        <button type="submit" className="bg-white border rounded px-4 py-1 hover:bg-gray-100">
-          🔍 Search
-        </button>
-*/}
+                  <input
+                      type="text"
+                      placeholder="Type a word..."
+                      className="border p-2 rounded w-full sm:w-64"
+                       value={query}
+                       onChange={(e) => setQuery(e.target.value)}
+                  />
+
+                  <button
+                        type="submit"
+                        className="bg-white border rounded px-4 py-1 hover:bg-gray-100"
+                  >
+                    🔍 Search
+                  </button>
+
       </form>
 
       <p className="italic text-muted-foreground mt-8">

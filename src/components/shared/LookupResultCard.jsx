@@ -1,7 +1,8 @@
 // COMPONENT: LookupResultCard.jsx
-// PURPOSE: Displays a result from a dictionary/context lookup
+// PURPOSE: Displays a result from a dictionary/context lookup + save to glossary
 
 import React from 'react';
+import { useVaultStore } from '../../stores/vaultStore';
 
 const langFlags = {
   en: '🇬🇧',
@@ -10,6 +11,16 @@ const langFlags = {
 };
 
 const LookupResultCard = ({ word, translation, partOfSpeech, context, from, to }) => {
+  const addToGlossary = useVaultStore((state) => state.addToGlossary);
+
+  const handleSave = () => {
+    addToGlossary({
+      word,
+      meaning: translation,
+      lang: to,
+    });
+  };
+
   return (
     <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 space-y-3">
       {/* Source word */}
@@ -31,6 +42,14 @@ const LookupResultCard = ({ word, translation, partOfSpeech, context, from, to }
           {context}
         </div>
       )}
+
+      {/* Save Button */}
+      <button
+        onClick={handleSave}
+        className="mt-3 px-3 py-1 bg-green-100 rounded hover:bg-green-200 text-sm"
+      >
+        ➕ Save to Glossary
+      </button>
     </div>
   );
 };

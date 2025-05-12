@@ -4,23 +4,12 @@
 import { create } from 'zustand';
 
 export const useVaultStore = create((set) => ({
-  words: [],
-  cards: [],
+  cards: [], // context cards
+  setCards: (newCards) => set({ cards: newCards }),
 
-  addWord: (word) =>
-    set((state) =>
-      state.words.includes(word)
-        ? state
-        : { words: [...state.words, word] }
-    ),
-
-  removeWord: (word) =>
+  glossary: [], // 🆕
+  addToGlossary: (entry) =>
     set((state) => ({
-      words: state.words.filter((w) => w !== word),
+      glossary: [...state.glossary, entry],
     })),
-
-  clearVault: () => set({ words: [] }),
-
-  // Mock: add sample context cards
-  setCards: (cards) => set({ cards }),
 }));
