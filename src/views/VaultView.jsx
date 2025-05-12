@@ -4,6 +4,8 @@
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
 
+const removeFromVault = useVaultStore((state) => state.removeFromVault);
+
 const VaultView = () => {
   const vault = useVaultStore((state) => state.entries);
 
@@ -23,6 +25,12 @@ const VaultView = () => {
               <div className="text-sm text-gray-500">
                 Tone: <em>{entry.tone}</em> | Theme: <em>{entry.theme}</em>
               </div>
+              <button
+                className="ml-2 text-red-600 hover:underline text-sm"
+                onClick={() => removeFromVault(card.word)}
+              >
+                ❌ Remove
+              </button>
             </li>
           ))}
         </ul>

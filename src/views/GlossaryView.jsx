@@ -4,6 +4,8 @@
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
 
+const removeFromGlossary = useVaultStore((state) => state.removeFromGlossary);
+
 const GlossaryView = () => {
   const glossary = useVaultStore((state) => state.glossary);
 
@@ -18,9 +20,15 @@ const GlossaryView = () => {
           {glossary.map((entry, index) => (
             <li key={index} className="border p-3 rounded shadow-sm bg-white">
               <strong>{entry.word}</strong> — {entry.meaning} ({entry.lang})
+              <button
+                className="ml-2 text-red-600 hover:underline text-sm"
+                onClick={() => removeFromGlossary(entry.word)}
+              >
+                ❌ Remove
+              </button>
             </li>
-          ))}
-        </ul>
+  ))}
+</ul>
       )}
     </div>
   );

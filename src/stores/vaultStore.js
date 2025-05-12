@@ -24,6 +24,18 @@ export const useVaultStore = create((set, get) => ({
       }
     }),
 
+  // Remove glossary entries
+  removeFromGlossary: (word) =>
+    set((state) => ({
+      glossary: state.glossary.filter((entry) => entry.word !== word),
+    })),
+
+  // Remove vault entries
+  removeFromVault: (word) =>
+    set((state) => ({
+      cards: state.cards.filter((card) => card.word !== word),
+    })),
+
   // 🧩 Vault entries with tone + theme
   entries: [],
   addToVault: (entry) =>
