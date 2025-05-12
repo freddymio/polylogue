@@ -10,55 +10,25 @@ const langFlags = {
   es: '🇪🇸',
 };
 
-const LookupResultCard = ({ word, translation, partOfSpeech, context, from, to }) => {
+const LookupResultCard = ({ result }) => {
+  const { word, translation, language } = result;
+
   const addToGlossary = useVaultStore((state) => state.addToGlossary);
   const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {
-    // Save to glossary
-    addToGlossary({
-      word: result.word,
-      translation: result.translation,
-      lang: result.language,
-    });
-
-    // Save to vault with additional metadata
-    addToVault({
-      word: result.word,
-      translation: result.translation,
-      tone: result.tone || 'highlight',
-      theme: result.theme || 'identity',
-    });
+    addToGlossary({ word, translation, lang: language });
+    addToVault({ word, translation, language, tone: 'highlight', theme: 'identity' });
   };
 
   return (
-    <div className="bg-white border border-gray-200 rounded-xl shadow-sm p-4 space-y-3">
-      {/* Source word */}
-      <div className="text-lg font-semibold">
-        {langFlags[from]} {word}{' '}
-        {partOfSpeech && (
-          <span className="text-sm italic text-gray-500">({partOfSpeech})</span>
-        )}
+    <div className="border p-3 rounded bg-white">
+      <div>
+        <strong>{word}</strong> <em>({language})</em>
       </div>
-
-      {/* Translation */}
-      <div className="text-md text-gray-800">
-        <span className="font-medium">{langFlags[to]}</span> {translation}
-      </div>
-
-      {/* Context sentence */}
-      {context && (
-        <div className="text-sm italic text-muted-foreground border-t pt-2 mt-2">
-          {context}
-        </div>
-      )}
-
-      {/* Save Button */}
-      <button
-        onClick={handleSave}
-        className="mt-3 px-3 py-1 bg-green-100 rounded hover:bg-green-200 text-sm"
-      >
-        ➕ Save to Glossary
+      <div>{language} Traduction de "{translation}"</div>
+      <button onClick={handleSave} className="mt-2 text-purple-600 hover:underline">
+        ➕ Save to Glossary & Vault
       </button>
     </div>
   );
