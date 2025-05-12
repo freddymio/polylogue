@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from 'react';
 import { useLookupStore } from '../stores/lookupStore';
+import LookupResultCard from '../components/shared/LookupResultCard';
 
 const LookupView = () => {
   const { query, sourceLang, targetLang } = useLookupStore();
@@ -19,7 +20,9 @@ const LookupView = () => {
       setResults([
         {
           word: query,
-          translation: `(${targetLang}) Translation of "${query}"`,
+          translation: `Traduction de "${query}"`,
+          partOfSpeech: 'noun',
+          context: `Used in a sentence: "The ${query} was beautiful."`,
           from: sourceLang,
           to: targetLang,
         },
@@ -40,10 +43,15 @@ const LookupView = () => {
       ) : (
         <div className="space-y-4">
           {results.map((r, i) => (
-            <div key={i} className="border rounded-lg p-4 shadow-sm bg-white">
-              <p className="text-lg font-medium">{r.word}</p>
-              <p className="text-sm text-muted-foreground">{r.translation}</p>
-            </div>
+            <LookupResultCard
+              key={i}
+              word={r.word}
+              translation={r.translation}
+              partOfSpeech={r.partOfSpeech}
+              context={r.context}
+              from={r.from}
+              to={r.to}
+            />
           ))}
         </div>
       )}
