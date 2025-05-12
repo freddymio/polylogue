@@ -17,7 +17,7 @@ const GlossaryView = () => {
       ) : (
         <ul className="space-y-2">
           {glossary.map((entry, index) => (
-            <li key={index} className="border p-3 rounded shadow-sm bg-white">
+            <li key={index} className="border p-3 rounded bg-white shadow-sm">
               <strong>{entry.word}</strong> — {entry.meaning} ({entry.lang})
               <button
                 className="ml-2 text-red-600 hover:underline text-sm"
@@ -25,9 +25,10 @@ const GlossaryView = () => {
               >
                 ❌ Remove
               </button>
-            </li>
-  ))}
-</ul>
+          </li>
+        ))}
+      </ul>
+
       )}
     </div>
   );
