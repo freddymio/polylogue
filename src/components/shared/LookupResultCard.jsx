@@ -12,14 +12,22 @@ const langFlags = {
 
 const LookupResultCard = ({ word, translation, partOfSpeech, context, from, to }) => {
   const addToGlossary = useVaultStore((state) => state.addToGlossary);
+  const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {
+    // Save to glossary
     addToGlossary({
-      word,
-      translation,
-      language: to, // 🧠 This reflects the target language
-      tone: 'highlight',
-      theme: 'identity',
+      word: result.word,
+      translation: result.translation,
+      lang: result.language,
+    });
+
+    // Save to vault with additional metadata
+    addToVault({
+      word: result.word,
+      translation: result.translation,
+      tone: result.tone || 'highlight',
+      theme: result.theme || 'identity',
     });
   };
 

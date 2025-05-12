@@ -1,12 +1,14 @@
 // STORE: vaultStore.js
-// PURPOSE: Zustand-based global state for saved words & context cards
+// PURPOSE: Stores glossary + vault cards with tone/theme metadata
 
 import { create } from 'zustand';
 
-export const useVaultStore = create((set) => ({
+export const useVaultStore = create((set, get) => ({
+  // 🔹 Context Gallery cards
   cards: [],
   setCards: (newCards) => set({ cards: newCards }),
 
+  // 📚 Glossary entries
   glossary: [],
   addToGlossary: (entry) =>
     set((state) => {
@@ -21,4 +23,12 @@ export const useVaultStore = create((set) => ({
         return {}; // no change
       }
     }),
+
+  // 🧩 Vault entries with tone + theme
+  entries: [],
+  addToVault: (entry) =>
+    set((state) => ({
+      entries: [...state.entries, entry],
+    })),
+  listVault: () => get().entries,
 }));
