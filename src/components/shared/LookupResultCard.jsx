@@ -1,33 +1,47 @@
 // COMPONENT: LookupResultCard.jsx
-// PURPOSE: Displays a result from a dictionary/context lookup + save to glossary
+// PURPOSE: Displays one result from a lookup, with save-to-vault action
 
 import React from 'react';
 import { useVaultStore } from '../../stores/vaultStore';
 
-const langFlags = {
-  en: '🇬🇧',
-  fr: '🇫🇷',
-  es: '🇪🇸',
-};
-
 const LookupResultCard = ({ result = {} }) => {
-  const { word = '', translation = '', language = 'unknown' } = result;
+  const {
+    word = '',
+    translation = '',
+    partOfSpeech = 'noun',
+    language = 'unknown',
+  } = result;
 
   const addToGlossary = useVaultStore((state) => state.addToGlossary);
   const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {
     addToGlossary({ word, translation, lang: language });
-    addToVault({ word, translation, language, tone: 'highlight', theme: 'identity' });
+    addToVault({
+      word,
+      translation,
+      language,
+      tone: 'highlight', // 🎯 placeholder
+      theme: 'identity',  // 🎯 placeholder
+    });
   };
 
   return (
-    <div className="border p-3 rounded bg-white">
+    <div className="border rounded p-4 bg-white shadow-sm text-left space-y-2">
       <div>
-        <strong>{word}</strong> <em>({language})</em>
+        <span className="text-lg font-semibold">{word}</span>
+        <span className="text-sm text-gray-500 pl-2">({partOfSpeech})</span>
       </div>
-      <div>{language} Traduction de "{translation}"</div>
-      <button onClick={handleSave} className="mt-2 text-purple-600 hover:underline">
+      <div className="text-gray-700">
+        {translation}
+      </div>
+      <div className="text-xs text-muted-foreground italic">
+        Language: {language}
+      </div>
+      <button
+        onClick={handleSave}
+        className="text-sm text-purple-600 hover:underline"
+      >
         ➕ Save to Glossary & Vault
       </button>
     </div>
