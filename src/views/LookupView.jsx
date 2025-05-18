@@ -93,23 +93,20 @@ export default function LookupView() {
       {error && <p className="text-red-600">{error}</p>}
 
       {result && (
-        <div className="bg-white rounded shadow p-4 space-y-2">
-          <div className="flex justify-between items-center">
-            <h2 className="text-xl font-bold">{result.translation}</h2>
-            <LanguageBadge source={sourceLang} target={targetLang} />
-          </div>
-          <div>
-            <h3 className="font-semibold">Examples:</h3>
-            <ul className="list-disc list-inside">
-              {result.examples.map((ex, i) => <li key={i}>{ex}</li>)}
-            </ul>
-          </div>
-          <div>
-            <h3 className="font-semibold">Related:</h3>
-            <p>{result.related.join(', ')}</p>
-          </div>
-        </div>
-      )}
+          <LookupResultCard
+              result={{
+                word: query,
+                translation: result.translation,
+                partOfSpeech: 'noun',
+                example: result.examples?.[0] || '',
+                related: result.related || [],
+                sourceLang,
+                targetLang,
+                tone: 'highlight',
+                theme: 'identity',
+              }}
+            />
+          )}
     </div>
   );
 }
