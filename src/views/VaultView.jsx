@@ -3,37 +3,22 @@
 
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
+import VaultEntryCard from '../components/shared/VaultEntryCard';
 
-const VaultView = () => {
+export default function VaultView() {
   const vault = useVaultStore((state) => state.cards);
-  const removeFromVault = useVaultStore((state) => state.removeFromVault);
 
   return (
-    <div className="p-4 max-w-2xl mx-auto space-y-4">
-      <h2 className="text-xl font-bold">🧑‍💼 Vault</h2>
-
+    <div className="p-4 max-w-3xl mx-auto space-y-3">
+      <h2 className="text-2xl font-bold mb-2">🔐 Vault</h2>
       {vault.length === 0 ? (
-        <p className="italic text-muted-foreground">No entries saved yet.</p>
+        <p className="text-muted-foreground italic">No entries stored.</p>
       ) : (
-        <ul className="space-y-2">
-          {vault.map((entry, index) => (
-            <li key={index} className="border p-3 rounded bg-white shadow-sm">
-              <strong>{entry.word}</strong> — {entry.translation}
-              <div className="text-sm italic">
-                Tone: <span className="text-gray-600">{entry.tone}</span> | Theme: <span className="text-gray-600">{entry.theme}</span>
-              </div>
-              <button
-                className="mt-2 text-red-600 hover:underline text-sm"
-                onClick={() => removeFromVault(entry.word)}
-              >
-                ❌ Remove
-              </button>
-            </li>
-          ))}
-        </ul>
+        vault.map((entry, i) => (
+          <VaultEntryCard key={i} entry={entry} />
+        ))
       )}
     </div>
   );
-};
+}
 
-export default VaultView;

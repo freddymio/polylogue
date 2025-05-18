@@ -196,15 +196,55 @@ You should see the Polylogue interface.
 ```bash
 polylogue/
 ├── docs/                    # Documentation
+│   ├── BACKUP_GUIDE.md
+│   ├── COMPONENTS.md
+│   ├── CONTRIBUTING.md
+│   ├── LOOKUP_FLOW_ROADMAP.md
+│   ├── OPTIONAL_IDEAS.md
+│   ├── Polylogue PDR.md
+│   ├── Polylogue PDR.pdf
+│   ├── PROJECT_STRUCTURE.md
+│   ├── ROADMAP.md
 │   └── SETUP.md             # This setup guide
+│   ├── tools/
+│   │   ├── README.md
+│   │   └── sync_vm_to_host.py
 ├── public/                  # Static assets (optional)
 ├── src/                     # Source code
+│   ├── api/
+│   │   └── mockLookup.js
 │   ├── components/
 │   │   ├── shared/          # Shared reusable components
+│   │   │   ├── ContextGallery.jsx
+│   │   │   ├── ContextGalleryCard.jsx
+│   │   │   ├── ContextNavigatorComponent.jsx
+│   │   │   ├── DirectionSwitcher.jsx
+│   │   │   ├── FooterBar.jsx
+│   │   │   ├── GlossaryEntryCard.jsx
+│   │   │   ├── GlossaryTableComponent.jsx
+│   │   │   ├── HeaderBar.jsx
+│   │   │   ├── LanguageBadge.jsx
+│   │   │   ├── LanguageSelectorComponent.jsx
+│   │   │   ├── LookupResultCard.jsx
+│   │   │   ├── SearchBarComponent.jsx
+│   │   │   ├── VaultEntryCard.jsx
+│   │   │   ├── VaultPreviewCard.jsx
+│   │   │   └── ViewSwitcher.jsx
 │   │   └── ui/              # Manually added UI components
+│   │   │   └── card.jsx
 │   ├── hooks/               # Custom React hooks
+│   │   └── useVault.js
 │   ├── stores/              # Global state stores
+│   │   ├── lookupStore.js
+│   │   └── vaultStore.js
 │   ├── views/               # View containers (pages)
+│   │   ├── ContextNavigatorView.jsx
+│   │   ├── GlossaryView.jsx
+│   │   ├── HomeView.jsx
+│   │   ├── LanguageManagerView.jsx
+│   │   ├── LookupView.jsx
+│   │   ├── NotFoundView.jsx
+│   │   └── VaultView.jsx
 │   ├── App.jsx              # App shell
 │   ├── main.jsx             # Entry point
 │   └── index.css            # Global styles
@@ -216,10 +256,11 @@ polylogue/
 ├── tailwind.config.js       # Tailwind config (manual)
 ├── tsconfig.json            # Alias configuration
 ├── vite.config.js           # Vite configuration
-└── README.md
-```
+├── LICENSE                  # GPLv3 license
+├── LICENSE.md               # Project license
+└── README.md                # Project readme file
 
----
+```
 
 ## Known Issues & Workarounds
 

@@ -3,35 +3,22 @@
 
 import React from 'react';
 import { useVaultStore } from '../stores/vaultStore';
+import GlossaryEntryCard from '../components/shared/GlossaryEntryCard';
 
-const GlossaryView = () => {
+export default function GlossaryView() {
   const glossary = useVaultStore((state) => state.glossary);
-  const removeFromGlossary = useVaultStore((state) => state.removeFromGlossary);
 
   return (
-    <div className="p-4 space-y-4 max-w-xl mx-auto">
-      <h2 className="text-xl font-bold">📚 Your Glossary</h2>
-
+    <div className="p-4 max-w-3xl mx-auto space-y-3">
+      <h2 className="text-2xl font-bold mb-2">📚 Glossary</h2>
       {glossary.length === 0 ? (
-        <p className="italic text-muted-foreground">No saved entries yet.</p>
+        <p className="text-muted-foreground italic">Nothing saved yet.</p>
       ) : (
-        <ul className="space-y-2">
-          {glossary.map((entry, index) => (
-            <li key={index} className="border p-3 rounded bg-white shadow-sm">
-              <strong>{entry.word}</strong> — {entry.meaning} ({entry.lang})
-              <button
-                className="ml-2 text-red-600 hover:underline text-sm"
-                onClick={() => removeFromGlossary(entry.word)}
-              >
-                ❌ Remove
-              </button>
-          </li>
-        ))}
-      </ul>
-
+        glossary.map((entry, i) => (
+          <GlossaryEntryCard key={i} entry={entry} />
+        ))
       )}
     </div>
   );
-};
+}
 
-export default GlossaryView;
