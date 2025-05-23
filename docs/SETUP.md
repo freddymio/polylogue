@@ -209,25 +209,30 @@ polylogue/
 │   ├── tools/
 │   │   ├── README.md
 │   │   └── sync_vm_to_host.py
-├── public/                  # Static assets (optional)
+├── public/                  # Static assets
+│   ├── index.html # Includes <div id="modal-root"></div> for floating modals
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   └── manifest.webmanifest
 ├── src/                     # Source code
 │   ├── api/
 │   │   └── mockLookup.js
 │   ├── components/
 │   │   ├── shared/          # Shared reusable components
+│   │   │   ├── ConfirmDeleteModal.jsx # Floating delete modal via createPortal
 │   │   │   ├── ContextGallery.jsx
 │   │   │   ├── ContextGalleryCard.jsx
 │   │   │   ├── ContextNavigatorComponent.jsx
 │   │   │   ├── DirectionSwitcher.jsx
 │   │   │   ├── FooterBar.jsx
-│   │   │   ├── GlossaryEntryCard.jsx
+│   │   │   ├── GlossaryEntryCard.jsx # Triggers ConfirmDeleteModal from glossary list
 │   │   │   ├── GlossaryTableComponent.jsx
 │   │   │   ├── HeaderBar.jsx
 │   │   │   ├── LanguageBadge.jsx
 │   │   │   ├── LanguageSelectorComponent.jsx
 │   │   │   ├── LookupResultCard.jsx
 │   │   │   ├── SearchBarComponent.jsx
-│   │   │   ├── VaultEntryCard.jsx
+│   │   │   ├── VaultEntryCard.jsx # Triggers ConfirmDeleteModal from vault list
 │   │   │   ├── VaultPreviewCard.jsx
 │   │   │   └── ViewSwitcher.jsx
 │   │   └── ui/              # Manually added UI components
@@ -239,12 +244,12 @@ polylogue/
 │   │   └── vaultStore.js
 │   ├── views/               # View containers (pages)
 │   │   ├── ContextNavigatorView.jsx
-│   │   ├── GlossaryView.jsx
+│   │   ├── GlossaryView.jsx # Uses GlossaryEntryCard and ConfirmDeleteModal
 │   │   ├── HomeView.jsx
 │   │   ├── LanguageManagerView.jsx
 │   │   ├── LookupView.jsx
 │   │   ├── NotFoundView.jsx
-│   │   └── VaultView.jsx
+│   │   └── VaultView.jsx    # Uses VaultEntryCard and ConfirmDeleteModal
 │   ├── App.jsx              # App shell
 │   ├── main.jsx             # Entry point
 │   └── index.css            # Global styles
@@ -309,6 +314,14 @@ git log --oneline    # Compact history
 ```
 
 💡 Always run `git status` before pulling or pushing.
+
+---
+
+## 📝 Notes
+
+- `ConfirmDeleteModal.jsx` uses `ReactDOM.createPortal` to render outside the main root into a dedicated `<div id="modal-root">` in `public/index.html`.
+- Glossary and Vault cards were unified in layout and interaction style.
+- Modal actions (`onConfirm`, `onCancel`) are passed down and toggle internal state.
 
 ---
 

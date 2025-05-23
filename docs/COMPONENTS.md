@@ -24,6 +24,9 @@ This document defines the major reusable components and views of the Polylogue P
 - `NoteEditorComponent`
 - `VaultExportOptions`
 - `ConfirmDeleteModal`
+- `VaultEntryCard` — displays a single word in the vault with language badge and delete action.
+- `ConfirmDeleteModal` — floating modal that appears when removing a word from the vault, rendered using `createPortal` into `#modal-root`.
+
 
 ### 4. 🌐 LanguageManagerView
 - `LanguagePickerComponent`
@@ -36,6 +39,8 @@ This document defines the major reusable components and views of the Polylogue P
 - `GlossarySearch`
 - `TermDetailsModal`
 - `ConfirmDeleteModal`
+- `GlossaryEntryCard` — shows glossary entries with source/target language and triggers the same `ConfirmDeleteModal` as Vault.
+
 
 ---
 
