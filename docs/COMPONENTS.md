@@ -23,6 +23,7 @@ This document defines the major reusable components and views of the Polylogue P
 - `TagFilterControls`
 - `NoteEditorComponent`
 - `VaultExportOptions`
+- `ConfirmDeleteModal`
 
 ### 4. 🌐 LanguageManagerView
 - `LanguagePickerComponent`
@@ -34,6 +35,7 @@ This document defines the major reusable components and views of the Polylogue P
 - `GlossaryTableComponent`
 - `GlossarySearch`
 - `TermDetailsModal`
+- `ConfirmDeleteModal`
 
 ---
 

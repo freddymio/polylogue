@@ -1,14 +1,5 @@
 📁 Folder Structure
 
-
-+---src
-    +---hooks
-    +---stores
-    +---views
-
-
-📁 Folder Structure
-
 ```bash
 polylogue/
 ├── docs/                    # Documentation
@@ -26,6 +17,12 @@ polylogue/
 │   │   ├── README.md
 │   │   └── sync_vm_to_host.py
 ├── public/                  # Static assets (optional)
+│   ├── icon-192.png
+│   ├── icon-512.png
+│   ├── manifest.json
+│   ├── manifest.webmanifest
+│   ├── vite.svg
+│   └── index.html           # File created as modal window floating issue
 ├── src/                     # Source code
 │   ├── api/
 │   │   └── mockLookup.js
@@ -75,5 +72,4 @@ polylogue/
 ├── LICENSE                  # GPLv3 license
 ├── LICENSE.md               # Project license
 └── README.md                # Project readme file
-
 ```

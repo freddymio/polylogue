@@ -22,6 +22,8 @@ const HomeView = () => {
 
   return (
     <div className="h-full p-8 flex flex-col items-center justify-center text-center space-y-6">
+<p className="bg-red-300 p-2">🔥 Tailwind test HomeView.jsx</p>
+
       <h1 className="text-3xl font-bold">Welcome to Polylogue</h1>
       <p className="max-w-xl text-muted-foreground">
         A multilingual dictionary experience designed to help you navigate words, meanings, and context — not just translation.
