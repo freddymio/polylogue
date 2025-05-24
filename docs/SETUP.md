@@ -185,6 +185,12 @@ export default defineConfig({
 npm run dev
 ```
 
+Use `--force` to ensure changes are rebuilt:
+
+```bash
+npm run dev -- --force
+```
+
 Then open your browser at: `http://localhost:5173`
 
 You should see the Polylogue interface.
@@ -241,7 +247,7 @@ polylogue/
 │   │   └── useVault.js
 │   ├── stores/              # Global state stores
 │   │   ├── lookupStore.js
-│   │   └── vaultStore.js
+│   │   └── vaultStore.js    # Zustand store with localStorage sync
 │   ├── views/               # View containers (pages)
 │   │   ├── ContextNavigatorView.jsx
 │   │   ├── GlossaryView.jsx # Uses GlossaryEntryCard and ConfirmDeleteModal
@@ -322,6 +328,10 @@ git log --oneline    # Compact history
 - `ConfirmDeleteModal.jsx` uses `ReactDOM.createPortal` to render outside the main root into a dedicated `<div id="modal-root">` in `public/index.html`.
 - Glossary and Vault cards were unified in layout and interaction style.
 - Modal actions (`onConfirm`, `onCancel`) are passed down and toggle internal state.
+- State is preserved in localStorage via Zustand’s `persist()` middleware for both glossary and vault entries (`vaultStore.js`).
+- Tailwind utility classes like `fixed`, `rounded`, `shadow`, `z-50` are used for modal layout.
+- Layouts across Glossary and Vault were unified with flex and spacing utilities.
+
 
 ---
 

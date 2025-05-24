@@ -9,16 +9,20 @@ import ConfirmDeleteModal from "../components/shared/ConfirmDeleteModal";
 export default function GlossaryView() {
   const glossary = useVaultStore((state) => state.glossary);
   const remove = useVaultStore((state) => state.removeFromGlossary);
-
   const [modalWord, setModalWord] = useState(null);
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Glossary</h1>
+    <div className="p-4 md:p-6 max-w-screen-md mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
+        📘 Glossary
+      </h1>
+
       {glossary.length === 0 ? (
-        <p className="text-gray-500">Your glossary is empty.</p>
+        <p className="text-center text-gray-500 italic">
+          Your glossary is empty.
+        </p>
       ) : (
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {glossary.map((entry, index) => (
             <GlossaryEntryCard
               key={index}

@@ -9,17 +9,20 @@ import ConfirmDeleteModal from "../components/shared/ConfirmDeleteModal";
 export default function VaultView() {
   const vaultCards = useVaultStore((state) => state.cards);
   const remove = useVaultStore((state) => state.removeFromVault);
-
   const [modalWord, setModalWord] = useState(null);
 
   return (
-    <div className="p-4 max-w-3xl mx-auto space-y-3">
-      <h2 className="text-2xl font-bold mb-2">🔐 Vault</h2>
+    <div className="p-4 md:p-6 max-w-screen-md mx-auto">
+      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
+        🔐 Vault
+      </h1>
 
       {vaultCards.length === 0 ? (
-        <p className="text-muted-foreground italic">No entries stored.</p>
+        <p className="text-center text-gray-500 italic">
+          Your vault is empty.
+        </p>
       ) : (
-        <div className="grid gap-4">
+        <div className="space-y-4">
           {vaultCards.map((entry, index) => (
             <VaultEntryCard
               key={index}

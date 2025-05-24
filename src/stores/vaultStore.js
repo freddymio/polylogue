@@ -1,66 +1,58 @@
-// STORE: vaultStore.js
-// PURPOSE: Stores glossary + vault cards with tone/theme metadata
+// 📁 vaultStore.js
+// 🧠 Zustand store for glossary and vault + persistent localStorage sync
 
 import { create } from 'zustand';
+import { persist } from 'zustand/middleware';
 
-const LOCAL_KEYS = {
-  glossary: 'polylogue_glossary',
-  vault: 'polylogue_vault',
-};
+export const useVaultStore = create(
+  persist(
+    (set, get) => ({
+      // 🔹 Context Gallery cards (non-persistent)
+      cards: [],
+      glossary: [],
 
-const loadLocal = (key, fallback = []) => {
-  const raw = localStorage.getItem(key);
-  try {
-    return raw ? JSON.parse(raw) : fallback;
-  } catch {
-    return fallback;
-  }
-};
+      setCards: (newCards) => set({ cards: newCards }),
 
-export const useVaultStore = create((set, get) => ({
-  // 🔹 Context Gallery cards
-  cards: loadLocal(LOCAL_KEYS.vault),
-  glossary: loadLocal(LOCAL_KEYS.glossary),
-  setCards: (newCards) => {
-    localStorage.setItem(LOCAL_KEYS.vault, JSON.stringify(newCards));
-    set({ cards: newCards });
-  },
+      // 📚 Glossary actions
+      addToGlossary: (entry) =>
+        set((state) => {
+          const exists = state.glossary.find(
+            (e) => e.word === entry.word && e.translation === entry.translation
+          );
+          if (!exists) {
+            return { glossary: [...state.glossary, entry] };
+          }
+          return {};
+        }),
 
-  // 📚 Glossary management
-  addToGlossary: (entry) => {
-    const state = get();
-    const exists = state.glossary.find(
-      (e) => e.word === entry.word && e.translation === entry.translation
-    );
-    if (!exists) {
-      const updated = [...state.glossary, entry];
-      localStorage.setItem(LOCAL_KEYS.glossary, JSON.stringify(updated));
-      set({ glossary: updated });
+      removeFromGlossary: (word) =>
+        set((state) => ({
+          glossary: state.glossary.filter((entry) => entry.word !== word),
+        })),
+
+      // 🔐 Vault actions
+      addToVault: (entry) =>
+        set((state) => {
+          const exists = state.cards.find((c) => c.word === entry.word);
+          if (!exists) {
+            return { cards: [...state.cards, entry] };
+          }
+          return {};
+        }),
+
+      removeFromVault: (word) =>
+        set((state) => ({
+          cards: state.cards.filter((card) => card.word !== word),
+        })),
+
+      listVault: () => get().cards,
+    }),
+    {
+      name: 'vault-storage', // 🔒 Key in localStorage
+      partialize: (state) => ({
+        cards: state.cards,
+        glossary: state.glossary,
+      }),
     }
-  },
-
-  removeFromGlossary: (word) => {
-    const updated = get().glossary.filter((entry) => entry.word !== word);
-    localStorage.setItem(LOCAL_KEYS.glossary, JSON.stringify(updated));
-    set({ glossary: updated });
-  },
-
-  // 🔐 Vault management
-  addToVault: (entry) => {
-    const state = get();
-    const exists = state.cards.find((c) => c.word === entry.word);
-    if (!exists) {
-      const updated = [...state.cards, entry];
-      localStorage.setItem(LOCAL_KEYS.vault, JSON.stringify(updated));
-      set({ cards: updated });
-    }
-  },
-
-  removeFromVault: (word) => {
-    const updated = get().cards.filter((card) => card.word !== word);
-    localStorage.setItem(LOCAL_KEYS.vault, JSON.stringify(updated));
-    set({ cards: updated });
-  },
-
-  listVault: () => get().cards,
-}));
+  )
+);
