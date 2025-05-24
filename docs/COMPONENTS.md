@@ -5,76 +5,77 @@ This document defines the major reusable components and views of the Polylogue P
 
 ---
 
-## 📍 Main Views
+## 📍 Main Views (`/components/views/`)
 
 ### 1. 🏠 HomeView
-- `SearchBarComponent`
-- `LanguageSelectorComponent`
-- `DirectionSwitcher` (⇌)
-- `SuggestionPanel` (optional)
+- `SearchBarComponent` – Input field with live query dispatch.
+- `LanguageSelectorComponent` – Dropdown or modal to pick base/target languages.
+- `DirectionSwitcher` (⇌) – Flips source ↔ target direction.
+- `SuggestionPanel` *(optional)* – Contextual term/phrase recommendations.
 
 ### 2. 🧭 ContextNavigatorView
-- `ContextCardComponent` (for each sense)
-- `ContextMetadata` (register, domain, tone)
-- `NavigationControls`
+- `ContextCardComponent` – Display each sense or nuance with metadata.
+- `ContextMetadata` – Shows register, domain, tone, and related tags.
+- `NavigationControls` – Arrows or swipes for semantic navigation.
 
 ### 3. 🗝️ VaultView
-- `WordEntryCard`
-- `TagFilterControls`
-- `NoteEditorComponent`
-- `VaultExportOptions`
-- `ConfirmDeleteModal`
-- `VaultEntryCard` — displays a single word in the vault with language badge and delete action.
-- `ConfirmDeleteModal` — floating modal that appears when removing a word from the vault, rendered using `createPortal` into `#modal-root`.
-
+- `VaultEntryCard` – A word card with badge, metadata, and delete icon.
+- `TagFilterControls` – Filter saved entries by tag.
+- `NoteEditorComponent` – Rich text area for personal notes per entry.
+- `VaultExportOptions` – Export actions (e.g., JSON, TXT).
+- `ConfirmDeleteModal` – Floating modal rendered via `createPortal` to `#modal-root`.
 
 ### 4. 🌐 LanguageManagerView
-- `LanguagePickerComponent`
-- `PreferredLanguagesBox`
-- `FullLanguageList`
-- `SaveResetControls`
+- `LanguagePickerComponent` – UI to browse all languages (grouped, scrollable).
+- `PreferredLanguagesBox` – Selected preferred languages.
+- `FullLanguageList` – Complete list, possibly searchable.
+- `SaveResetControls` – Confirm or cancel changes to preferences.
 
 ### 5. 📘 GlossaryView
-- `GlossaryTableComponent`
-- `GlossarySearch`
-- `TermDetailsModal`
-- `ConfirmDeleteModal`
-- `GlossaryEntryCard` — shows glossary entries with source/target language and triggers the same `ConfirmDeleteModal` as Vault.
-
-
----
-
-## 🛠️ Utility Components
-
-- `HeaderBar`
-- `FooterBar`
-- `IconButton` (🔍, 🎤, 🔊, ➕, ✖)
-- `ToastNotification`
-- `LocalStorageManager` (to persist language prefs and vault)
-- `ThemeManager` (dark/light mode toggle)
+- `GlossaryTableComponent` – Main display of glossary terms.
+- `GlossarySearch` – Input/search logic for glossary.
+- `GlossaryEntryCard` – Displays a term pair and actions.
+- `TermDetailsModal` – Modal for full term explanation.
+- `ConfirmDeleteModal` – Shared deletion modal from VaultView.
 
 ---
 
-## 📦 App Shell & Routing
+## 🛠️ Shared Utility Components (`/components/shared/`)
 
-- `AppShell` (wraps all views)
-- `RouterComponent` (client-side routing)
-- `ErrorBoundary`
+- `HeaderBar` – Top navigation bar.
+- `FooterBar` – Bottom action bar or credits.
+- `IconButton` – Generic button with icon (🔍, 🎤, 🔊, ➕, ✖).
+- `ToastNotification` – Ephemeral feedback (success, error, info).
+- `LocalStorageManager` – Handles saving/restoring preferences & vault.
+- `ThemeManager` – Light/dark toggle controller.
 
 ---
 
-## 🗂️ Notes
+## 📦 App Shell & Routing (`/App.jsx`, `/router/`, `/layouts/`)
 
-- Each component must include section headers:
+- `AppShell` – Wraps all views and layout slots.
+- `RouterComponent` – Client-side route switching logic.
+- `ErrorBoundary` – Catches view-level rendering errors.
+
+---
+
+## 📁 State Management & Logic (`/stores`, `/hooks`)
+
+- Zustand-based stores for:
+  - Vault
+  - LanguagePrefs
+  - Glossary
+- Custom hooks for:
+  - useVault()
+  - useGlossarySearch()
+  - useModal()
+
+---
+
+## 🧭 Guidelines
+
+- Each component must begin with:
   ```js
   // COMPONENT: SearchBar
   // PURPOSE: Handle user input for word lookup
-  ```
-- Inline comments must explain **why**, not just what.
-- Shared components live in `/components/shared`
-- View-specific components go in `/components/views`
-- State logic is kept in `/stores` or `/hooks`
 
----
-
-“Built with love by Bayo and the Living Spark”
