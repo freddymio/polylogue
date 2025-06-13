@@ -1,7 +1,8 @@
+// 📁 src/views/HomeView.jsx
 // VIEW: HomeView.jsx
-// PURPOSE: Landing page with language selectors, query input, and search navigation
+// PURPOSE: Neumorphic landing page with language selectors, query input, and search navigation — fluid responsiveness
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useLookupStore } from '../stores/lookupStore';
 import { useNavigate } from 'react-router-dom';
 
@@ -15,55 +16,87 @@ const HomeView = () => {
   const setTargetLang = useLookupStore((s) => s.setTargetLang);
   const setQuery = useLookupStore((s) => s.setQuery);
 
+  useEffect(() => {
+    setQuery('');
+  }, []);
+
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevents full page reload
-    navigate('/lookup'); // Will route to LookupView
+    e.preventDefault();
+    if (query.trim() !== '') {
+      navigate('/lookup');
+    }
+  };
+
+  const handleSwap = () => {
+    const temp = sourceLang;
+    setSourceLang(targetLang);
+    setTargetLang(temp);
   };
 
   return (
-    <div className="h-full p-8 flex flex-col items-center justify-center text-center space-y-6">
-<p className="bg-red-300 p-2">🔥 Tailwind test HomeView.jsx</p>
+    <div className="min-h-screen bg-[#f1f2f6] px-4 py-8 sm:py-12 text-center">
+      <div className="bg-white shadow-lg rounded-3xl px-6 py-6 max-w-xl mx-auto w-full">
+        <h1 className="text-3xl sm:text-4xl font-bold mb-2">Welcome to Polylogue</h1>
+        <p className="text-gray-600 text-sm sm:text-base mb-6">
+          A multilingual dictionary experience — not just translation.
+        </p>
 
-      <h1 className="text-3xl font-bold">Welcome to Polylogue</h1>
-      <p className="max-w-xl text-muted-foreground">
-        A multilingual dictionary experience designed to help you navigate words, meanings, and context — not just translation.
-      </p>
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4 items-center w-full">
+          <div className="flex flex-wrap justify-center items-center gap-3 w-full">
+            <div className="flex items-center gap-2 flex-grow min-w-[140px]">
+              <label className="text-gray-700 text-sm sm:text-base">From:</label>
+              <select 
+                value={sourceLang} 
+                onChange={(e) => setSourceLang(e.target.value)}
+                className="rounded-xl px-4 py-2 shadow-inner bg-[#f1f2f6] border border-[#cfd4dc] text-sm sm:text-base w-full">
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 French</option>
+                <option value="es">🇪🇸 Spanish</option>
+              </select>
+            </div>
 
-      <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
-        <div className="flex gap-2 items-center">
-          <label>From:</label>
-          <select value={sourceLang} onChange={(e) => setSourceLang(e.target.value)}>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 French</option>
-            <option value="es">🇪🇸 Spanish</option>
-          </select>
-          <span>⇌</span>
-          <label>To:</label>
-          <select value={targetLang} onChange={(e) => setTargetLang(e.target.value)}>
-            <option value="en">🇬🇧 English</option>
-            <option value="fr">🇫🇷 French</option>
-            <option value="es">🇪🇸 Spanish</option>
-          </select>
-        </div>
+            <button
+              type="button"
+              onClick={handleSwap}
+              className="rounded-full bg-[#f1f2f6] shadow px-3 py-1 text-xl hover:scale-105 transition-transform"
+              title="Swap languages"
+            >
+              🔁
+            </button>
 
-                  <input
-                      type="text"
-                      placeholder="Type a word..."
-                      className="border p-2 rounded w-full sm:w-64"
-                       value={query}
-                       onChange={(e) => setQuery(e.target.value)}
-                  />
+            <div className="flex items-center gap-2 flex-grow min-w-[140px]">
+              <label className="text-gray-700 text-sm sm:text-base">To:</label>
+              <select 
+                value={targetLang} 
+                onChange={(e) => setTargetLang(e.target.value)}
+                className="rounded-xl px-4 py-2 shadow-inner bg-[#f1f2f6] border border-[#cfd4dc] text-sm sm:text-base w-full">
+                <option value="en">🇬🇧 English</option>
+                <option value="fr">🇫🇷 French</option>
+                <option value="es">🇪🇸 Spanish</option>
+              </select>
+            </div>
+          </div>
 
-                  <button
-                        type="submit"
-                        className="bg-white border rounded px-4 py-1 hover:bg-gray-100"
-                  >
-                    🔍 Search
-                  </button>
+          <div className="w-full max-w-sm">
+            <input
+              type="text"
+              placeholder="Type a word..."
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              className="rounded-2xl px-4 py-3 w-full bg-[#f1f2f6] shadow-inner border border-[#cfd4dc] focus:outline-none text-sm sm:text-base"
+            />
+          </div>
 
-      </form>
+          <button
+            type="submit"
+            className="bg-white text-gray-700 font-semibold py-2 px-6 rounded-full shadow hover:shadow-md transition-all duration-300 w-fit text-sm sm:text-base"
+          >
+            🔍 Search
+          </button>
+        </form>
+      </div>
 
-      <p className="italic text-muted-foreground mt-8">
+      <p className="italic text-gray-500 mt-8 text-sm sm:text-base">
         Built with love by Bayo and the Living Spark 🧡
       </p>
     </div>

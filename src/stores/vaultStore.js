@@ -3,6 +3,7 @@
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
+import { v4 as uuidv4 } from 'uuid';
 
 export const useVaultStore = create(
   persist(
@@ -16,18 +17,18 @@ export const useVaultStore = create(
       // 📚 Glossary actions
       addToGlossary: (entry) =>
         set((state) => {
-          const exists = state.glossary.find(
-            (e) => e.word === entry.word && e.translation === entry.translation
-          );
+          const exists = state.cards.find((c) => c.word === entry.word);
           if (!exists) {
-            return { glossary: [...state.glossary, entry] };
+            return {
+              cards: [...state.cards, { ...entry, id: uuidv4() }],
+            };
           }
           return {};
         }),
 
-      removeFromGlossary: (word) =>
+      removeFromGlossary: (id) =>
         set((state) => ({
-          glossary: state.glossary.filter((entry) => entry.word !== word),
+          glossary: state.glossary.filter((entry) => entry.id !== id),
         })),
 
       // 🔐 Vault actions
@@ -35,20 +36,29 @@ export const useVaultStore = create(
         set((state) => {
           const exists = state.cards.find((c) => c.word === entry.word);
           if (!exists) {
-            return { cards: [...state.cards, entry] };
+            return {
+              cards: [
+                ...state.cards,
+                {
+                  ...entry,
+                  id: uuidv4(),
+                  direction: `${entry.sourceLang} ⇌ ${entry.targetLang}`,
+                },
+              ],
+            };
           }
           return {};
         }),
 
-      removeFromVault: (word) =>
+      removeFromVault: (id) =>
         set((state) => ({
-          cards: state.cards.filter((card) => card.word !== word),
+          cards: state.cards.filter((card) => card.id !== id),
         })),
 
       listVault: () => get().cards,
     }),
     {
-      name: 'vault-storage', // 🔒 Key in localStorage
+      name: 'vault-storage',
       partialize: (state) => ({
         cards: state.cards,
         glossary: state.glossary,

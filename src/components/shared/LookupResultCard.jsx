@@ -3,6 +3,7 @@
 
 import React from 'react';
 import { useVaultStore } from '../../stores/vaultStore';
+import { useGlossaryStore } from '../../stores/glossaryStore';
 import LanguageBadge from './LanguageBadge';
 
 const LookupResultCard = ({ result = {} }) => {
@@ -16,7 +17,7 @@ const LookupResultCard = ({ result = {} }) => {
     targetLang = '',
   } = result;
 
-  const addToGlossary = useVaultStore((state) => state.addToGlossary);
+  const addToGlossary = useGlossaryStore((state) => state.addToGlossary);
   const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {

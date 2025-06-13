@@ -146,6 +146,36 @@ export function CardContent({ children }) {
 
 ---
 
+## 🔑 UUID Setup for Entry IDs
+
+To ensure that every glossary and vault entry has a stable and unique identifier across sessions:
+
+### ✅ Step 1: Install the UUID Package
+
+```bash
+npm install uuid
+```
+
+### ✅ Step 2: Import the Generator
+
+In any file where you need to create unique IDs (e.g., `vaultStore.js`, `glossaryStore.js`):
+
+```js
+import { v4 as uuidv4 } from 'uuid';
+```
+
+### ✅ Step 3: Assign Unique IDs to Entries
+
+Use the UUID when creating new glossary or vault entries:
+
+```js
+{ ...entry, id: uuidv4() }
+```
+
+This ensures each entry has a persistent unique identifier, required for delete operations and mapping.
+
+---
+
 ## Enable Path Aliases (for @/ syntax)
 
 1. **Install Node Path Module** *(Node.js >= 14 usually has it)*
@@ -342,5 +372,49 @@ git log --oneline    # Compact history
 * 🧪 Further OS notes can be added (Linux/macOS)
 
 ---
+
+## 🛠️ DEV TIPS: Local Storage & Debugging in Vite Apps
+
+### 🔄 Clear Persistent State Efficiently
+When working with Zustand stores that persist to `localStorage` or `sessionStorage`, stale or corrupted data may cause views not to render properly. Here are safe and fast ways to reset storage:
+
+---
+
+### ✅ Recommended: Full Storage Reset via DevTools
+1. Open DevTools (`F12` or `Ctrl + Shift + I`)
+2. Go to the `Application` tab
+3. In the left sidebar, right-click on **"Storage"** (or on the site origin under "Local Storage")
+4. Click **"Clear site data"**
+
+🔹 This removes:
+- `localStorage`
+- `sessionStorage`
+- Cookies
+- Cache
+
+💡 This method bypasses the "allow pasting" warning and guarantees a clean state across all tabs.
+
+---
+
+### 🧪 Alternative: Clear individual keys via Console
+If needed, you can target specific storage keys like so:
+
+```js
+localStorage.removeItem('vault-storage');
+localStorage.removeItem('glossary-storage');
+localStorage.removeItem('lookup-storage');
+```
+
+Note: This logs `undefined` but still completes the task successfully.
+
+---
+
+### 🔁 After Clearing Storage
+- Refresh the page manually (`Ctrl + R`)
+- Add new entries as needed (e.g., via Lookup ➜ Add to Glossary)
+- Verify they appear correctly in `/vault` and `/glossary`
+
+---
+
 
 🧡 *Built with love by Bayo and the Living Spark*

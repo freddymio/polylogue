@@ -3,19 +3,24 @@
 
 import React, { useState, useEffect } from 'react';
 import { lookupMockFetch } from '../api/mockLookup';
-import LanguageBadge from '../components/shared/LanguageBadge';
+import { useLookupStore } from '../stores/lookupStore';
 import LookupResultCard from '../components/shared/LookupResultCard';
 
 const MAX_HISTORY = 10;
 
 export default function LookupView() {
-  const [query, setQuery] = useState('');
-  const [sourceLang, setSourceLang] = useState('EN');
-  const [targetLang, setTargetLang] = useState('FR');
+  const query = useLookupStore((state) => state.query);
+  const sourceLang = useLookupStore((state) => state.sourceLang);
+  const targetLang = useLookupStore((state) => state.targetLang);
+  const setQuery = useLookupStore((state) => state.setQuery);
+  const setSourceLang = useLookupStore((state) => state.setSourceLang);
+  const setTargetLang = useLookupStore((state) => state.setTargetLang);
+
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [recent, setRecent] = useState([]);
+  const [lookupPerformed, setLookupPerformed] = useState(false);
 
   useEffect(() => {
     const saved = localStorage.getItem('recentLookups');
@@ -36,10 +41,16 @@ export default function LookupView() {
     if (!query.trim()) return;
     setLoading(true);
     setError(null);
+    setLookupPerformed(false);
     try {
       const res = await lookupMockFetch(query, sourceLang, targetLang);
-      setResult(res);
+      setResult({
+        ...res,
+        sourceLang,
+        targetLang,
+      });
       if (manual) saveToRecent({ query, sourceLang, targetLang });
+      setLookupPerformed(true);
     } catch (err) {
       setError(err.message);
     } finally {
@@ -92,21 +103,21 @@ export default function LookupView() {
       {loading && <p className="italic text-muted-foreground">Looking it up…</p>}
       {error && <p className="text-red-600">{error}</p>}
 
-      {result && (
-          <LookupResultCard
-              result={{
-                word: query,
-                translation: result.translation,
-                partOfSpeech: 'noun',
-                example: result.examples?.[0] || '',
-                related: result.related || [],
-                sourceLang,
-                targetLang,
-                tone: 'highlight',
-                theme: 'identity',
-              }}
-            />
-          )}
+      {lookupPerformed && result && (
+        <LookupResultCard
+          result={{
+            word: result.word || query,
+            translation: result.translation,
+            partOfSpeech: 'noun',
+            example: result.examples?.[0] || '',
+            related: result.related || [],
+            sourceLang: result.sourceLang,
+            targetLang: result.targetLang,
+            tone: 'highlight',
+            theme: 'identity',
+          }}
+        />
+      )}
     </div>
   );
 }

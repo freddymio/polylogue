@@ -3,7 +3,7 @@ export async function lookupMockFetch(query, sourceLang, targetLang) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       resolve({
-        query,
+        word: query,
         sourceLang,
         targetLang,
         translation: `${query} (mocked ${targetLang})`,

@@ -1,20 +1,28 @@
-// FILE: App.jsx
-// PURPOSE: Core shell of Polylogue that switches views based on route
+// App.jsx
+import { Routes, Route } from "react-router-dom";
+import Layout from "./layout/Layout";
+import HomeView from "./views/HomeView";
+import GlossaryView from "./views/GlossaryView";
+import VaultView from "./views/VaultView";
+import LookupView from "./views/LookupView";
+import ContextNavigatorView from "./views/ContextNavigatorView";
+import LanguageManagerView from "./views/LanguageManagerView";
+import NotFoundView from "./views/NotFoundView";
 
-import React from 'react';
-import { useLocation } from 'react-router-dom';
-import ViewSwitcher from './components/shared/ViewSwitcher';
-import HeaderBar from './components/shared/HeaderBar'; // ⬅️ Header bar component
-
-const App = () => {
-  const { pathname } = useLocation();
-
+function App() {
   return (
-    <main className="min-h-screen flex flex-col">
-      <HeaderBar /> {/* ✅ Insert the top navigation here */}
-      <ViewSwitcher path={pathname} />
-    </main>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomeView />} />
+        <Route path="glossary" element={<GlossaryView />} />
+        <Route path="vault" element={<VaultView />} />
+        <Route path="lookup" element={<LookupView />} />
+        <Route path="contexts" element={<ContextNavigatorView />} />
+        <Route path="languages" element={<LanguageManagerView />} />
+        <Route path="*" element={<NotFoundView />} />
+      </Route>
+    </Routes>
   );
-};
+}
 
 export default App;
