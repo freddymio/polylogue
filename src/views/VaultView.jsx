@@ -10,16 +10,6 @@ export default function VaultView() {
   const vaultCards = useVaultStore((state) => state.cards);
   const removeFromVault = useVaultStore((state) => state.removeFromVault);
 
-  /* // Debugging the keys and entry shape
-  console.log(
-    "Vault entry keys:",
-    vaultCards.map((entry, i) => ({
-      i,
-      id: entry.id,
-      word: entry.word,
-    }))
-  );
-*/
   return (
     <div className="p-4 md:p-6 max-w-screen-md mx-auto">
       <h1 className="text-3xl font-bold mb-6 text-center text-foreground">

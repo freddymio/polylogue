@@ -13,6 +13,7 @@ const HeaderBar = () => {
     { to: '/contexts', label: '🧩 Context Gallery' },
     { to: '/glossary', label: '📚 Glossary' },
     { to: '/context', label: '🧠 Context' },
+    { to: '/history', label: '📜 History' },
     { to: '/languages', label: '🌐 Language Settings' },
   ];
 

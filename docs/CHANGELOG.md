@@ -1,3 +1,95 @@
+## [2025-06-15 | 22:46] — ✨ HistoryView Enhancements + Glossary Cleanup
+
+### ✅ What Was Implemented
+
+#### HistoryView Overhaul
+- Added `📜 History` link to main navigation (`HeaderBar.jsx`)
+- Activated inline preview of stored entries using `<EntryCard />`
+- Implemented expand/collapse logic per history item
+- Added "🔁 Modify this word in Lookup" button with Zustand prefill
+- Ensured `/lookup` receives and displays entry correctly
+
+#### GlossaryView Cleanup
+- Removed redundant `<h1>` heading
+- Fixed missing default export in `glossaryStore.js`
+- Unified layout spacing with VaultView
+
+#### Component Housekeeping
+- Moved unused `VaultPreviewCard.jsx` to `_archive/` folder
+- Updated `SETUP.md` to reflect archive move and folder structure
+
+### 🧪 Confirmed Working
+- History preview toggles and routes correctly
+- Lookup view receives prefilled word and direction
+- Vault/Glossary use consistent visuals and behavior
+- All links visible and working across screen sizes
+
+---
+
+🌙 All cleaned, patched, and archived with love. Ready for rest, or more magic tomorrow.
+
+---
+
+## [2025-06-14 | 18:39] — ⚠️ Broken HistoryView: Zustand Integration Incomplete
+
+### 🔍 What Was Attempted
+- Recent lookup history was originally handled via `localStorage` directly in `PolylogueView`.
+- We transitioned to `HistoryView.jsx` expecting lookup data from Zustand’s `lookupStore.js`, using:
+  ```js
+  const { recentLookups, removeFromRecent, clearRecent } = useLookupStore();
+  ```
+
+### 🐞 What Broke
+- `lookupStore.js` does **not contain**:
+  - `recentLookups` state
+  - `addToRecent()` method
+  - `clearRecent()` or `removeFromRecent()` handlers
+- As a result:
+  - `HistoryView.jsx` throws errors during `.map()` and `.length` calls.
+  - No recent entries are saved after clearing history.
+  - List never repopulates, even with new queries.
+
+---
+
+### ✅ Fix Plan (for next session)
+1. Rebuild `recentLookups` handling inside `lookupStore.js`:
+   - Add: `recentLookups: []`
+   - Add: `addToRecent(entry)`
+   - Add: `removeFromRecent(query)`
+   - Add: `clearRecent()`
+2. Ensure `PolylogueView.jsx` uses `addToRecent()` instead of direct `localStorage.setItem(...)`.
+3. Keep `HistoryView.jsx` mapped to Zustand `useLookupStore()` state — now consistent.
+
+---
+
+This changelog captures the broken state so we can reset cleanly and restore History syncing properly. 🧡
+
+---
+
+## [2025-06-14 | 11:52] — 🎉 PolylogueView Integrated: Home + Lookup Unification
+
+### ✅ Implemented
+- Created `PolylogueView.jsx` with:
+  - Language selectors
+  - Query input field
+  - Unified lookup result rendering
+- Connected `/polylogue` route in `App.jsx`
+- Decoupled recent lookup history for future `HistoryView` component
+- Lookup result only appears after valid search (`lookupPerformed`)
+- LookupResultCard adjusted to fix visual spacing bug between `word` and `partOfSpeech`
+
+### 🧠 UX Decision
+- Preserved input field after search for convenience
+- Cleared query only when landing back on HomeView
+
+### 🔍 Next Steps
+- Optional: replace `/lookup` or `/` default route with PolylogueView
+- Begin styling merge and context expansion
+
+Polylogue now has a sleek, minimal, single-screen lookup flow. 🧡
+
+---
+
 ## [2025-06-13 | 18:16] — 🧭 Design Reflection: Lookup vs HomeView Unification
 
 ### 🔍 Observation

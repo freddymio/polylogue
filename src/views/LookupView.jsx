@@ -3,7 +3,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { lookupMockFetch } from '../api/mockLookup';
-import { useLookupStore } from '../stores/lookupStore';
+import useLookupStore from '../stores/lookupStore';
 import LookupResultCard from '../components/shared/LookupResultCard';
 
 const MAX_HISTORY = 10;

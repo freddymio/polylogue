@@ -8,7 +8,7 @@
 
 import ReactDOM from "react-dom";
 
-export default function ConfirmDeleteModal({ open, word, onCancel, onConfirm }) {
+export default function ConfirmDeleteModal({ open, word, message, onCancel, onConfirm }) {
   if (!open) return null;
 
   const modalRoot = document.getElementById("modal-root");
@@ -30,7 +30,7 @@ export default function ConfirmDeleteModal({ open, word, onCancel, onConfirm }) 
       <div className="bg-white text-black p-6 rounded-xl shadow-lg text-center space-y-4 max-w-sm w-full">
         <h2 className="text-xl font-bold">Confirm Deletion</h2>
         <p>
-          Are you sure you want to delete <strong>{word}</strong>?
+          {message ?? <>Are you sure you want to delete <strong>{word}</strong>?</>}
         </p>
         <div className="flex justify-center gap-4">
           <button

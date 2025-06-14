@@ -254,6 +254,7 @@ polylogue/
 │   ├── api/
 │   │   └── mockLookup.js
 │   ├── components/
+│   │   ├── _archive/          # Worked but Unused files
 │   │   ├── shared/          # Shared reusable components
 │   │   │   ├── ConfirmDeleteModal.jsx # Floating delete modal via createPortal
 │   │   │   ├── ContextGallery.jsx
@@ -316,6 +317,9 @@ Check for routing or component import errors (case-sensitive).
 ### UI or Style Not Loading
 
 Ensure TailwindCSS was installed and `@tailwind base;` etc. are in `index.css`.
+
+### Archived Components
+- `VaultPreviewCard.jsx`: previously considered for Vault entries, no longer used
 
 ---
 

@@ -3,7 +3,7 @@
 // PURPOSE: Neumorphic landing page with language selectors, query input, and search navigation — fluid responsiveness
 
 import React, { useEffect } from 'react';
-import { useLookupStore } from '../stores/lookupStore';
+import useLookupStore from '../stores/lookupStore';
 import { useNavigate } from 'react-router-dom';
 
 const HomeView = () => {

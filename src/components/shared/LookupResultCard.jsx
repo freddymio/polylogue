@@ -36,7 +36,7 @@ const LookupResultCard = ({ result = {} }) => {
     <div className="border rounded p-4 bg-white shadow-sm text-left space-y-2">
       <div className="flex justify-between items-center">
         <div>
-          <span className="text-lg font-semibold">{word}</span>
+          <span className="text-lg font-semibold">{word} </span>
           <span className="text-sm text-gray-500 pl-2">({partOfSpeech})</span>
         </div>
         <LanguageBadge source={sourceLang} target={targetLang} />
