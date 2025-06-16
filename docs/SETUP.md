@@ -255,6 +255,8 @@ polylogue/
 │   │   └── mockLookup.js
 │   ├── components/
 │   │   ├── _archive/          # Worked but Unused files
+│   │   │   ├── VaultPreviewCard.jsx
+│   │   │   └── ViewSwitcher.jsx
 │   │   ├── shared/          # Shared reusable components
 │   │   │   ├── ConfirmDeleteModal.jsx # Floating delete modal via createPortal
 │   │   │   ├── ContextGallery.jsx

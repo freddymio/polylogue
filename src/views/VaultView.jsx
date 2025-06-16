@@ -1,4 +1,4 @@
-// VaultView.jsx
+// 📁 src/views/VaultView.jsx
 import { useVaultStore } from "../stores/vaultStore";
 import EntryCard from "../components/shared/EntryCard";
 
@@ -11,26 +11,25 @@ export default function VaultView() {
   const removeFromVault = useVaultStore((state) => state.removeFromVault);
 
   return (
-    <div className="p-4 md:p-6 max-w-screen-md mx-auto">
-      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
+    <div className="p-4 md:p-6 max-w-screen-md mx-auto space-y-4">
+      <div className="flex items-center gap-2 text-2xl font-bold">
         🧑‍💼 Vault
-      </h1>
-      <div className="space-y-4">
-        {vaultCards.map((entry, index) => {
-          console.log(`Vault entry [${index}]:`, entry); // Add this line
-
-          return (
-            <EntryCard
-              key={entry.id}
-              id={entry.id}
-              term={entry.word}
-              translation={entry.translation}
-              direction={entry.direction ?? "unknown"}
-              onDelete={() => removeFromVault(entry.id)} // o removeFromVault
-            />
-          );
-        })}
       </div>
+
+      {vaultCards.length === 0 ? (
+        <p className="text-muted-foreground">No entries saved in your vault yet.</p>
+      ) : (
+        vaultCards.map((entry, index) => (
+          <EntryCard
+            key={entry.id}
+            id={entry.id}
+            term={entry.word}
+            translation={entry.translation}
+            direction={entry.direction ?? "unknown"}
+            onDelete={() => removeFromVault(entry.id)}
+          />
+        ))
+      )}
     </div>
   );
 }

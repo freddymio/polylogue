@@ -11,9 +11,9 @@ export default function GlossaryView() {
 
   return (
     <div className="p-4 md:p-6 max-w-screen-md mx-auto space-y-4">
-      <h1 className="text-3xl font-bold mb-6 text-center text-foreground">
+      <div className="flex items-center gap-2 text-2xl font-bold">
         📘 Glossary
-      </h1>
+      </div>
 
       {glossary.length === 0 ? (
         <p className="text-muted-foreground">No glossary entries yet.</p>

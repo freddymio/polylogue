@@ -1,9 +1,7 @@
 // 📁 src/views/PolylogueView.jsx
-// 🧠 Unified view: language selectors + input + result
-// 🧩 History moved out to keep layout clean
 
-import React, { useState } from 'react';
-import useLookupStore from '../stores/lookupStore'; // ✅ fixed: default import
+import React, { useState, useEffect, useRef } from 'react';
+import useLookupStore from '../stores/lookupStore';
 import { lookupMockFetch } from '../api/mockLookup';
 import LookupResultCard from '../components/shared/LookupResultCard';
 
@@ -21,11 +19,28 @@ export default function PolylogueView() {
   const [error, setError] = useState(null);
   const [lookupPerformed, setLookupPerformed] = useState(false);
 
+  const inputRef = useRef(null);
+
+  // ✅ Auto-run + select input text
+  useEffect(() => {
+    if (query) {
+      // Always auto-select input text on mount if there's a query
+      requestAnimationFrame(() => {
+        inputRef.current?.select();
+      });
+    }
+
+    if (query && sourceLang && targetLang) {
+      handleLookup();
+    }
+  }, []); // ← empty dependency list: run once on mount
+
   const handleLookup = async () => {
     if (!query.trim()) return;
     setLoading(true);
     setError(null);
     setLookupPerformed(false);
+
     try {
       const res = await lookupMockFetch(query, sourceLang, targetLang);
       const resultObj = {
@@ -58,6 +73,7 @@ export default function PolylogueView() {
   return (
     <div className="min-h-screen px-4 py-8 max-w-screen-md mx-auto text-center space-y-6">
       <h1 className="text-3xl font-bold">Polylogue Lookup</h1>
+
       <div className="flex gap-3 justify-center">
         <select
           value={sourceLang}
@@ -68,12 +84,14 @@ export default function PolylogueView() {
           <option value="fr">🇫🇷 French</option>
           <option value="es">🇪🇸 Spanish</option>
         </select>
+
         <button
           onClick={handleSwap}
           className="text-xl px-2 py-1 hover:scale-105 transition"
         >
           ⇌
         </button>
+
         <select
           value={targetLang}
           onChange={(e) => setTargetLang(e.target.value)}
@@ -87,11 +105,12 @@ export default function PolylogueView() {
 
       <div className="flex gap-2 w-full">
         <input
+          ref={inputRef}
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           className="flex-grow border px-4 py-2 rounded-xl"
-          placeholder="Type a word..."
+          placeholder="Type a word or phrase..."
         />
         <button
           onClick={handleLookup}

@@ -15,6 +15,8 @@ const LookupResultCard = ({ result = {} }) => {
     related = [],
     sourceLang = '',
     targetLang = '',
+    type = '', // ✅ idiom, collocation, expression
+    usage = '', // ✅ explanatory note
   } = result;
 
   const addToGlossary = useGlossaryStore((state) => state.addToGlossary);
@@ -41,13 +43,31 @@ const LookupResultCard = ({ result = {} }) => {
         </div>
         <LanguageBadge source={sourceLang} target={targetLang} />
       </div>
+
       <div className="text-gray-700">{translation}</div>
+
+      {/* ✅ Show idiom/expression note if available */}
+      {usage && (
+        <div className="text-xs text-amber-700 italic">
+          Usage: {usage}
+        </div>
+      )}
+
+      {/* ✅ Show type if provided */}
+      {type && (
+        <div className="text-xs text-muted-foreground">
+          Type: {type}
+        </div>
+      )}
+
       <div className="text-xs text-muted-foreground italic">
         Example: {example}
       </div>
+
       <div className="text-xs text-muted-foreground">
         Related: {related.join(', ')}
       </div>
+
       <button
         onClick={handleSave}
         className="text-sm text-purple-600 hover:underline"

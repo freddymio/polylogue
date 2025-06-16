@@ -1,3 +1,96 @@
+## [2025-06-16 | 22:32] — 🎯 Smart Input Behavior in LookupView
+
+### ✅ What Was Implemented
+- Auto-selects text inside the Lookup input on view load
+- Implemented using `requestAnimationFrame()` to ensure selection occurs *after* DOM paint
+- Enhances UX for users returning from:
+  - Home → Lookup
+  - History → Lookup
+  - Any session restore (via Zustand)
+
+### 💡 Outcome
+- Users can immediately overwrite, edit, or delete prefilled query
+- LookupView now behaves with true “active memory”
+
+### 📂 Housekeeping
+- Moved unused `ViewSwitcher.jsx` to `_archive/`
+- Confirmed no imports or usage exist
+- Updated `SETUP.md` folder structure
+
+---
+
+## [2025-06-16 | 21:17] — 🧪 Responsive Layout Audit + Expression Lookup Roadmap
+
+### ✅ What Was Done
+- Verified all main views in DevTools mobile simulation (400px)
+- Confirmed layout integrity for: Lookup, Vault, Glossary, History, Context, 404
+- No breaking overflow or truncation detected
+
+### 📝 Noted for Future Polish
+- Improve spacing on Lookup input/buttons
+- Add padding to History "Remove" buttons
+- Merge dropdowns in Language Settings view
+- Apply unified card spacing with responsive tweaks
+
+### 💡 Proposed Sprint Ahead
+- ✨ Begin support for **multi-word / idiomatic expression lookup**
+  - Handle phrases like "raining cats and dogs"
+  - Improve contextual translation awareness
+  - Store source/target pair with phrase and optional domain/context
+
+---
+
+## [2025-06-16 | 20:40] — ✅ Passive Language Pair Memory via Zustand
+
+### ✅ What Was Validated
+- `sourceLang` and `targetLang` are persisted using Zustand + localStorage
+- No explicit save needed — last used language pair is auto-remembered
+- `query` also preserved for seamless session continuation
+- Verified via full browser reload and Shift+Refresh
+
+### 💡 Outcome
+- Lookup feels self-aware and user-friendly
+- Requires no backend, no user interaction — memory just works
+
+---
+
+## [2025-06-16 | 20:12] — ⚡ Auto-Triggered Lookup on Prefilled State
+
+### 🧠 What Changed
+- Added `useEffect()` in `PolylogueView.jsx` to trigger lookup on mount
+- Checks if `query`, `sourceLang`, and `targetLang` are all set
+- Eliminates need for user to click "Lookup" if navigated from `HistoryView`
+- Keeps full compatibility with manual search behavior
+
+### ✅ Outcome
+- Lookup screen becomes reactive + intelligent
+- Improves flow from History or external route injection
+
+---
+
+## [2025-06-16 | 18:35] — ✅ VaultView Unified + Full App UX Review
+
+### ✨ Highlights
+
+- Unified `VaultView.jsx` layout to match `GlossaryView`
+  - Replaced `<h1>` with cleaner emoji label
+  - Synced spacing (`space-y-4`, `p-4 md:p-6`)
+  - Removed dev console logs
+- Confirmed `EntryCard` is used across Glossary, Vault, and History
+- Validated `/lookup` prefill from History route works consistently
+- All pages render without error: Vault, Glossary, Lookup, History, Language Settings
+- Navigation bar fully functional with proper icons and labels
+- 404 page displays correctly for undefined `/context` route
+
+### 🧪 Status
+- ✅ Manual test complete (all routes + interactions)
+- ✅ No console errors
+- ✅ UX aligned between all sections
+
+Next steps: responsive layout, Lookup auto-trigger, and improving Language Settings UX.
+
+---
+
 ## [2025-06-15 | 22:46] — ✨ HistoryView Enhancements + Glossary Cleanup
 
 ### ✅ What Was Implemented
