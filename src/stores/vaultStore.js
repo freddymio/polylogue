@@ -20,7 +20,14 @@ export const useVaultStore = create(
           const exists = state.cards.find((c) => c.word === entry.word);
           if (!exists) {
             return {
-              cards: [...state.cards, { ...entry, id: uuidv4() }],
+              cards: [
+                ...state.cards,
+                {
+                  ...entry,
+                  id: uuidv4(),
+                  direction: `${entry.sourceLang} ⇌ ${entry.targetLang}`
+                },
+              ],
             };
           }
           return {};
@@ -42,7 +49,7 @@ export const useVaultStore = create(
                 {
                   ...entry,
                   id: uuidv4(),
-                  direction: `${entry.sourceLang} ⇌ ${entry.targetLang}`,
+                  direction: `${entry.sourceLang} ⇌ ${entry.targetLang}`
                 },
               ],
             };

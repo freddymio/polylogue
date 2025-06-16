@@ -10,6 +10,7 @@ export default function EntryCard({
   term,
   translation,
   direction,
+  tag,
   onDelete
 }) {
   const [showModal, setShowModal] = useState(false);
@@ -36,6 +37,11 @@ export default function EntryCard({
         <div>
           <p className="text-sm text-muted-foreground">{term}</p>
           <h3 className="text-lg font-semibold text-foreground leading-tight">{translation}</h3>
+          {tag && (
+            <span className="inline-block mt-1 text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">
+              {tag}
+            </span>
+          )}
           <span className="text-sm italic text-gray-400">
             Direction {direction || "unknown"}
           </span>

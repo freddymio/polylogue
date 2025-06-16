@@ -256,7 +256,7 @@ polylogue/
 │   ├── components/
 │   │   ├── _archive/          # Worked but Unused files
 │   │   │   ├── VaultPreviewCard.jsx
-│   │   │   └── ViewSwitcher.jsx
+│   │   │   └── `ViewSwitcher.jsx` — legacy router view logic, replaced by App.jsx + Routes
 │   │   ├── shared/          # Shared reusable components
 │   │   │   ├── ConfirmDeleteModal.jsx # Floating delete modal via createPortal
 │   │   │   ├── ContextGallery.jsx

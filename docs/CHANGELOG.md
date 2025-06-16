@@ -1,3 +1,19 @@
+## [2025-06-16 | 23:35] — 🏷️ Tag Support for Vault & Glossary
+
+### ✅ What Was Done
+- Updated `LookupResultCard` to save `type` (e.g. "idiom") as `tag`
+- Patched `EntryCard` to display tag as a styled badge
+- Extended `VaultView` and `GlossaryView` to pass through `entry.tag`
+- Validated Zustand store entries retain tag via `...entry` spreads
+- Normalized `direction` formatting in `addToVault()` and `addToGlossary()`
+
+### ✨ Outcome
+- Users can now see entry type (idiom, slang, etc.) in both saved views
+- Vault/Glossary entries gain meaningful classification
+- Prepares foundation for future filtering or search by tag
+
+---
+
 ## [2025-06-16 | 22:32] — 🎯 Smart Input Behavior in LookupView
 
 ### ✅ What Was Implemented

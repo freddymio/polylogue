@@ -23,12 +23,14 @@ const LookupResultCard = ({ result = {} }) => {
   const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {
-    addToGlossary({ word, translation, sourceLang, targetLang });
+    addToGlossary({ word, translation, sourceLang, targetLang, tag: type });
+
     addToVault({
       word,
       translation,
       sourceLang,
       targetLang,
+      tag: type,
       tone: 'highlight', // 🎯 placeholder
       theme: 'identity',  // 🎯 placeholder
     });

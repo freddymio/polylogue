@@ -24,6 +24,7 @@ export default function GlossaryView() {
             id={entry.id}
             term={entry.word}
             translation={entry.translation}
+            tag={entry.tag}
             direction={entry.direction ?? 'unknown'}
             onDelete={() => removeFromGlossary(entry.id)}
           />

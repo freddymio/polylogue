@@ -25,6 +25,7 @@ export default function VaultView() {
             id={entry.id}
             term={entry.word}
             translation={entry.translation}
+            tag={entry.tag}
             direction={entry.direction ?? "unknown"}
             onDelete={() => removeFromVault(entry.id)}
           />
