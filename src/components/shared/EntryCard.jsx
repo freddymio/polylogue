@@ -34,18 +34,22 @@ export default function EntryCard({
   return (
     <div className="rounded-2xl bg-white/90 dark:bg-zinc-900/60 shadow-neu px-4 py-3 transition-all">
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-        <div>
+        <div className="space-y-1">
           <p className="text-sm text-muted-foreground">{term}</p>
           <h3 className="text-lg font-semibold text-foreground leading-tight">{translation}</h3>
-          {tag && (
-            <span className="inline-block mt-1 text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">
-              {tag}
+
+          <div className="flex flex-wrap items-center gap-2 mt-1">
+            {tag && (
+              <span className="inline-block text-xs bg-purple-100 text-purple-800 px-2 py-0.5 rounded-full">
+                {tag}
+              </span>
+            )}
+            <span className="text-xs italic text-gray-400">
+              Direction: {direction || "unknown"}
             </span>
-          )}
-          <span className="text-sm italic text-gray-400">
-            Direction {direction || "unknown"}
-          </span>
+          </div>
         </div>
+
         <div className="self-end">
           <button
             onClick={handleDelete}

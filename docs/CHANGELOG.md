@@ -1,3 +1,89 @@
+## [2025-06-20 | 23:59] — 🧹 Lookup & Tag Flow Refactor (Enter Key WIP)
+
+### ✅ What Was Done
+- **Vault & Glossary Tag Filtering**:
+  - Entries now include `tag` (e.g., `idiom`, `expression`, `slang`) when saved from Lookup
+  - Toggleable tag buttons implemented in both views
+  - Tag filters normalize casing and spacing for robust matches
+
+- **EntryCard Visual Polish**:
+  - Tag is now shown as a purple pill badge
+  - Direction line aligned in same row, spaced via `gap-2` layout
+
+- **Lookup Flow Improvements**:
+  - Input field auto-focuses and selects content on page load
+  - Query is trimmed before lookup execution
+  - Results stored with metadata (`tag`, `tone`, `theme`) in both Glossary and Vault
+  - `mockLookupFetch` typo corrected to actual `mockLookup`
+
+- **Enter Key Lookup [⚠️ Pending Full Fix]**:
+  - Implemented `form`-based submission wrapper
+  - Added `console.log()` debug lines to confirm key press and submission
+  - Current limitation: `onSubmit` not firing despite correct code — further investigation required tomorrow
+
+### 🔍 Outcome
+- Tag filters now visually and functionally work in both Glossary and Vault
+- Visual consistency improved across entries
+- Lookup interaction more responsive for mouse, Enter key fix pending
+
+---
+
+## [2025-06-20 | 21:20] — 🚀 LookupView Polished: Enter Trigger, Autofocus & Query Trim
+
+### ✅ What Was Done
+- **🔑 Enter Key Support**: Pressing `Enter` inside the input field now triggers the same lookup logic as clicking the button.
+- **👁️ Autofocus & Autoselect**: The input field automatically gains focus and selects its content on page load, enabling fast edits or overwrites.
+- **✂️ Query Trim Enforcement**: Lookup logic now trims whitespace from user input before executing a search. Prevents blank or misleading recent entries.
+- **🧠 Recent History Cleanup**: Only truly new (distinct) lookups are stored — leading/trailing spaces are now normalized before being stored or compared.
+- **🔄 Refactored Logic**:
+  - Used `useRef()` to control input focus.
+  - Applied `useEffect()` on mount to select + focus input.
+  - Replaced inline query access with `trimmed` variable to ensure consistent whitespace control across all logic branches.
+
+### 🔍 Outcome
+- Users can now hit Enter to launch a search without needing to click.
+- When opening Lookup view, typing can begin immediately.
+- Autoselection makes editing prefilled text smoother, especially when jumping from History or a prepopulated state.
+- Reduces risk of “invisible mismatch” entries in local history caused by trailing spaces.
+
+---
+
+## [2025-06-20 | 20:17] — 🧠 Vault + Glossary Tag Filtering Fixed & Hardened
+
+### ✅ What Was Done
+- Normalized `entry.tag` via `.trim().toLowerCase()` before filtering
+- Updated filter logic to match tag values in lowercase
+- Ensured filters reset properly when switching between views
+- Verified consistent import paths and component structure
+- Restored Vault and Glossary views from overwritten canvas
+- Confirmed working tag-based display for `idiom`, `slang`, `expression`
+
+### 🔍 Outcome
+- Tag filters now correctly show entries with matching tags
+- Tag-based navigation behaves predictably across views
+- Glossary and Vault filters no longer bleed state across views
+
+---
+
+## [2025-06-20 | 18:30] — ⚙️ Git Automation Script Added
+
+### ✅ What Was Done
+- Created `/scripts/git-auto.ps1`, a reusable PowerShell Git automation tool
+- Supports:
+  - Positional or prompted commit messages
+  - Configurable origin/branch via `git-config.json`
+  - Confirmation prompt with option to modify message/branch before pushing
+  - Help screen via `-Help`
+- Enhanced for project-wide, multi-user use
+- Added clear documentation to `SETUP.md`
+
+### 💡 Outcome
+- Allows safe, streamlined, cross-collaborator Git workflow
+- Prevents errors by prompting if Git is missing or config is absent
+- Reduces commit friction with timestamp fallback or interactive prompts
+
+---
+
 ## [2025-06-16 | 23:35] — 🏷️ Tag Support for Vault & Glossary
 
 ### ✅ What Was Done

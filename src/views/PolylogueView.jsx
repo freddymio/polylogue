@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import useLookupStore from '../stores/lookupStore';
-import { lookupMockFetch } from '../api/mockLookup';
+import mockLookup from '../api/mockLookup';
 import LookupResultCard from '../components/shared/LookupResultCard';
 
 export default function PolylogueView() {
@@ -42,7 +42,7 @@ export default function PolylogueView() {
     setLookupPerformed(false);
 
     try {
-      const res = await lookupMockFetch(query, sourceLang, targetLang);
+      const res = await mockLookup(query, sourceLang, targetLang);
       const resultObj = {
         ...res,
         sourceLang,

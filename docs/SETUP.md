@@ -231,6 +231,9 @@ You should see the Polylogue interface.
 
 ```bash
 polylogue/
+├── scripts/                # Project automation scripts
+│   ├── git-auto.ps1        # Interactive Git commit + push helper
+│   └── git-config.json     # Default origin/branch config used by script
 ├── docs/                    # Documentation
 │   ├── BACKUP_GUIDE.md
 │   ├── COMPONENTS.md
@@ -341,6 +344,28 @@ git commit -m "Initial commit after full setup"
 git pull origin main --allow-unrelated-histories
 git push -u origin main
 ```
+## ⚙️ Git Automation Script
+
+To simplify Git commits and ensure consistent pushes across environments:
+
+### 📁 Files
+- `/scripts/git-auto.ps1`: PowerShell script to auto-commit + push
+- `/scripts/git-config.json`: Stores your default `origin` and `branch`
+
+### ▶️ Usage
+
+```bash
+# Full usage with positional arguments
+./scripts/git-auto.ps1 "Fix lookup spacing" "main"
+
+# Message only (uses default branch from config)
+./scripts/git-auto.ps1 "Initial glossary layout"
+
+# No arguments (will prompt interactively)
+./scripts/git-auto.ps1
+
+# Help screen
+./scripts/git-auto.ps1 -Help
 
 ---
 

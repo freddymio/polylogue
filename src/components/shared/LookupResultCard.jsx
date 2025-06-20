@@ -15,24 +15,24 @@ const LookupResultCard = ({ result = {} }) => {
     related = [],
     sourceLang = '',
     targetLang = '',
-    type = '', // ✅ idiom, collocation, expression
-    usage = '', // ✅ explanatory note
+    tag = '',       // ✅ NOW ADDED
+    usage = '',     // ✅ explanatory note
   } = result;
 
   const addToGlossary = useGlossaryStore((state) => state.addToGlossary);
   const addToVault = useVaultStore((state) => state.addToVault);
 
   const handleSave = () => {
-    addToGlossary({ word, translation, sourceLang, targetLang, tag: type });
+    addToGlossary({ word, translation, sourceLang, targetLang, tag });
 
     addToVault({
       word,
       translation,
       sourceLang,
       targetLang,
-      tag: type,
-      tone: 'highlight', // 🎯 placeholder
-      theme: 'identity',  // 🎯 placeholder
+      tag,
+      tone: 'highlight',
+      theme: 'identity',
     });
   };
 
@@ -56,9 +56,14 @@ const LookupResultCard = ({ result = {} }) => {
       )}
 
       {/* ✅ Show type if provided */}
-      {type && (
+      {/* 
+        Legacy compatibility: we removed "type" as a prop 
+        but keeping the visual block empty for now to avoid 
+        runtime error 
+      */}
+      {false && (
         <div className="text-xs text-muted-foreground">
-          Type: {type}
+          Type: unused
         </div>
       )}
 

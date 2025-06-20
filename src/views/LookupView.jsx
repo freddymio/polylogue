@@ -1,8 +1,8 @@
 // VIEW: LookupView.jsx
 // PURPOSE: Displays lookup results based on current query and language settings
 
-import React, { useState, useEffect } from 'react';
-import { lookupMockFetch } from '../api/mockLookup';
+import React, { useState, useEffect, useRef } from 'react';
+import mockLookup from '../api/mockLookup';
 import useLookupStore from '../stores/lookupStore';
 import LookupResultCard from '../components/shared/LookupResultCard';
 
@@ -22,14 +22,24 @@ export default function LookupView() {
   const [recent, setRecent] = useState([]);
   const [lookupPerformed, setLookupPerformed] = useState(false);
 
+  const inputRef = useRef();
+
   useEffect(() => {
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
+
     const saved = localStorage.getItem('recentLookups');
     if (saved) setRecent(JSON.parse(saved));
   }, []);
 
   const saveToRecent = (entry) => {
     const exists = recent.find(
-      (e) => e.query === entry.query && e.sourceLang === entry.sourceLang && e.targetLang === entry.targetLang
+      (e) =>
+        e.query === entry.query &&
+        e.sourceLang === entry.sourceLang &&
+        e.targetLang === entry.targetLang
     );
     if (exists) return;
     const updated = [entry, ...recent].slice(0, MAX_HISTORY);
@@ -38,18 +48,21 @@ export default function LookupView() {
   };
 
   const handleLookup = async (manual = true) => {
-    if (!query.trim()) return;
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
     setLoading(true);
     setError(null);
     setLookupPerformed(false);
     try {
-      const res = await lookupMockFetch(query, sourceLang, targetLang);
+      console.log("🚀 Executing mockLookup with:", trimmed);
+      const res = await mockLookup(trimmed, sourceLang, targetLang);
       setResult({
         ...res,
         sourceLang,
         targetLang,
       });
-      if (manual) saveToRecent({ query, sourceLang, targetLang });
+      if (manual) saveToRecent({ query: trimmed, sourceLang, targetLang });
       setLookupPerformed(true);
     } catch (err) {
       setError(err.message);
@@ -67,21 +80,31 @@ export default function LookupView() {
 
   return (
     <div className="p-4 max-w-xl mx-auto space-y-4">
-      <div className="flex gap-2">
+      <form
+        className="flex gap-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          console.log("🔁 Submitting from form via Enter key");
+          handleLookup(true);
+        }}
+      >
         <input
+          name="lookupInput"
+          ref={inputRef}
           type="text"
+          autoComplete="off"
           className="border p-2 flex-1 rounded"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="Enter a word..."
         />
         <button
-          onClick={() => handleLookup(true)}
+          type="submit"
           className="bg-blue-600 text-white px-4 py-2 rounded"
         >
           Lookup
         </button>
-      </div>
+      </form>
 
       {recent.length > 0 && (
         <div className="border p-3 rounded bg-gray-50">
@@ -93,7 +116,10 @@ export default function LookupView() {
                 onClick={() => triggerRecent(item)}
                 className="cursor-pointer hover:underline"
               >
-                {item.query} <span className="text-xs text-muted-foreground">({item.sourceLang} ⇌ {item.targetLang})</span>
+                {item.query}{' '}
+                <span className="text-xs text-muted-foreground">
+                  ({item.sourceLang} ⇌ {item.targetLang})
+                </span>
               </li>
             ))}
           </ul>

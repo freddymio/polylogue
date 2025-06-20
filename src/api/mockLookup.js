@@ -1,48 +1,54 @@
 // 📁 src/api/mockLookup.js
+// 🎭 Simulated async lookup API response for testing purposes
 
-const idioms = {
-  'break a leg': {
-    word: 'Break a leg',
-    translation: 'Bonne chance !',
-    usage: 'Used to wish someone good luck before a performance.',
-    type: 'idiom',
-    partOfSpeech: 'phrase',
-    example: "You're going on stage? Break a leg!",
-    related: ['good luck', 'performance'],
-  },
-  'raining cats and dogs': {
-    word: 'Raining cats and dogs',
-    translation: 'Il pleut des cordes.',
-    usage: 'Used to describe heavy rainfall in an exaggerated way.',
-    type: 'idiom',
-    partOfSpeech: 'phrase',
-    example: "Don't forget your umbrella — it's raining cats and dogs!",
-    related: ['heavy rain', 'weather'],
-  },
-};
+export default async function mockLookup(query, sourceLang, targetLang) {
+  const delay = (ms) => new Promise((res) => setTimeout(res, ms));
+  await delay(150);
 
-export async function lookupMockFetch(query, sourceLang, targetLang) {
-  const normalized = query.toLowerCase().trim();
+  const examples = {
+    "break a leg": {
+      word: "Break a leg",
+      translation: "Bonne chance !",
+      tag: "idiom",
+      type: "phrase",
+      usage: "Used to wish someone good luck before a performance.",
+      example: "You're going on stage? Break a leg!",
+      related: ["good luck", "performance"],
+    },
+    "bite the hand that feeds you": {
+      word: "Bite the hand that feeds you",
+      translation: "Mordre la main qui vous nourrit",
+      tag: "idiom",
+      usage: "To harm or criticize someone you depend on.",
+      example: "I wouldn't complain so much—don’t bite the hand that feeds you.",
+      related: ["betrayal", "ingratitude"],
+    },
+    "barking up the wrong tree": {
+      word: "Barking up the wrong tree",
+      translation: "Faire fausse route",
+      tag: "idiom",
+      usage: "To pursue a mistaken or misguided course of action.",
+      example: "If you think I'm the culprit, you're barking up the wrong tree.",
+      related: ["mistake", "accusation"],
+    },
+  };
 
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      if (idioms[normalized]) {
-        resolve({
-          ...idioms[normalized],
-          sourceLang,
-          targetLang,
-        });
-      } else {
-        resolve({
-          word: query,
-          translation: `${query} (mocked ${targetLang})`,
-          sourceLang,
-          targetLang,
-          partOfSpeech: 'noun',
-          example: `${query} used in a sentence.`,
-          related: ['mock1', 'mock2'],
-        });
-      }
-    }, 600 + Math.random() * 400);
-  });
+  const key = query.toLowerCase().trim();
+
+  if (examples[key]) {
+    return {
+      ...examples[key],
+      direction: `${sourceLang} ⇀ ${targetLang}`,
+    };
+  }
+
+  return {
+    word: query,
+    translation: `${query} (mocked ${targetLang})`,
+    tag: '', // should stay blank if unknown
+    usage: '',
+    example: '',
+    related: [],
+    direction: `${sourceLang} ⇀ ${targetLang}`,
+  };
 }
